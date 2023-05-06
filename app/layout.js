@@ -1,4 +1,7 @@
+"use client"
 import './globals.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect } from 'react';
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -9,8 +12,15 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min")
+  }, []);
+
   return (
     <html lang="en">
+      <head>
+        <title>phantom</title>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )
