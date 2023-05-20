@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { setCookie } from 'cookies-next';
 
 
 
@@ -43,8 +44,8 @@ function Content() {
         password: e.target[1].value,
       }
 
-      console.log(data);
-      console.log(url);
+      // console.log(data);
+      // console.log(url);
 
       try {
         const res = await axios.post(url, data);
@@ -52,7 +53,8 @@ function Content() {
         if(res.data.success) {
             console.log(res.data);
             notify(res.data.message)
-            // router.push('/auth/login');
+            setCookie('token', res.data.token);
+            router.push('/');
         }
         else if (!res.data.success && res.data?.message) {
             notify_err(res.data.message)
