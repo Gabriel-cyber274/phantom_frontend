@@ -1154,6 +1154,7 @@ h1,h2,h3,h4,h5,h6, p {
 .chatBody .friend .replySide h6 {
   font-style: normal;
   font-weight: 400;
+  overflow-wrap: break-word;
   font-size: 10px;
   line-height: 10px;
   color: rgba(58, 58, 58, 0.7);
