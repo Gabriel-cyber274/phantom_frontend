@@ -13,6 +13,8 @@ export const environment = {
     scheme: 'http://',
     baseUrl: 'localhost:8000/api/',
     app_url: 'http://localhost:3000/',
+    socketUrl: 'http://localhost:4000',
+    fileUrl: '127.0.0.1:8000/',
   
     // *************************************
     // production: true,
@@ -25,49 +27,39 @@ export const environment = {
       googleLogin: 'login/g',
       register: 'register',
       logout: 'logout',
+      info: 'userInfo',
+      changeAvatar: 'changeAvatar',
+      addAvatar: 'addAvatar'
     },
-    post: {
-      main: 'posts',
-      privatePost: 'posts/private',
-      myPosts: 'myPosts',
-      media: 'media',
-      like: 'like',
-      unlike: 'unlike',
-      share: 'posts/share',
-      save: 'posts/save',
-      sharedPublic: 'posts/share/public',
-      sharedPrivate: 'posts/share/private',
-      allFriendsPost: 'posts/allFriendsPost'
+    reviews: {
+      main: 'goodReviews'
+    }, 
+    link: {
+      get: 'getLink',
+      create: 'createLink',
+      name: 'linkName/'
     },
-    comments: {
-      getComments: 'post-comments/',
-      main: 'comment',
-      subComment: 'subComment',
-      deleteComment: 'deleteComment/'
+    room: {
+      create: 'createRooom',
+      recievedRooms: 'recievedRooms',
+      sentRooms: 'sentRooms',
+      checkRoom: 'checkRoom/',
+      blockUser: 'blockUser',
+      reportUser: 'reportUser',
+      allowLinks: 'allowLinks',
+      revealProfile: 'revealProfile'
     },
-    stories: {
-      main: 'stories',
-      singleMedia: 'stories/media/single/',
-      singletext: 'stories/text/single/',
-      storyMedia: "stories/media/",
-      storyText: "stories/text/"
+    messages: {
+      getMessage: 'getMessage/',
+      sendMessage: 'sendMessage',
+      sendReply: 'sendReply',
+      read: 'read/',
+      voiceNote: 'voiceNote',
+      voicenoteGet: 'voicenotes/'
     },
-    friends: {
-      main: 'friends',
-      confirmFriend: 'friends/confirm',
-      removeFriend: 'removeFriend/'
-    },
-    user: {
-      main: 'users'
-    },
-    notification: {
-      main: 'notification',
-      read: 'notification/single/',
-      readAll: 'notification/markAll',
-      delete: 'notification/delete/'
-    },
-    search: {
-      main: 'search/'
+
+    tutorial: {
+      main: 'tutorial'
     }
   };
   

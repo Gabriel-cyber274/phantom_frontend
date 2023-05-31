@@ -5,17 +5,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { setCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 
 
 
 const baseUrl = environment.scheme + environment.baseUrl;
-function Content() {
+function Content({link}) {
   const [show, setShow] = useState(false);
   const router = useRouter();
-  const [supported, setSupported] = useState(false);
-  const [location, setLocation] = useState('');
-  
+  const [loading,setLoading] = useState(false);
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
   const notify = (res)=> {
@@ -23,10 +21,14 @@ function Content() {
   } 
 
   useEffect(()=> {
-   let int = setTimeout(() => {
-      setShow(true);
-  }, 2500);
-
+    let int = setTimeout(() => {
+        setShow(true);
+    }, 2500);
+    deleteCookie('token')
+    localStorage.removeItem('currentUser');
+    if(link) {
+      localStorage.setItem('link', link);
+    }
     return()=> clearTimeout(int);
   }, [])
 
@@ -44,15 +46,13 @@ function Content() {
         password: e.target[1].value,
       }
 
-      // console.log(data);
-      // console.log(url);
-
       try {
+        setLoading(true)
         const res = await axios.post(url, data);
-        console.log(res.data.message)
+        setLoading(false);
         if(res.data.success) {
-            console.log(res.data);
             notify(res.data.message)
+            localStorage.setItem('currentUser', JSON.stringify(res.data))
             setCookie('token', res.data.token);
             router.push('/');
         }
@@ -67,6 +67,7 @@ function Content() {
         }
       } catch (error) {
           notify_err('error')
+          setLoading(false);
           return error
       }
 
@@ -108,7 +109,7 @@ function Content() {
                                     <a href="">FORGOT PASSWORD?</a>
                                 </div>
                                 <div className='text-center mt-5 mb-3'>
-                                  <button className='py-2 px-5'>Sign Up</button>
+                                  <button className='py-2 px-5' disabled={loading}>Login</button>
                                 </div>
                                 <h3 className='text-center'>Don't have an account? <a href="/auth/register">Sign up</a></h3>
                               </form>

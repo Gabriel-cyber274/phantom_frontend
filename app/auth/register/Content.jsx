@@ -15,6 +15,7 @@ function Content() {
   const router = useRouter();
   const [supported, setSupported] = useState(false);
   const [location, setLocation] = useState('');
+  const [loading, setLoading] = useState(false);
 
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -71,7 +72,9 @@ function Content() {
       }
       
       try {
+        setLoading(true);
         const res = await axios.post(url, data);
+        setLoading(false);
         if(res.data.success) {
             notify(res.data.message);
             setTimeout(() => {
@@ -85,8 +88,8 @@ function Content() {
           notify_err(res.data.errors.email[0])
         }
       } catch (error) {
+          setLoading(false);
           notify_err('error')
-
           return error
       }
 
@@ -143,7 +146,7 @@ function Content() {
                                   </svg>
                                 </div>
                                 <div className='text-center mt-5 mb-3'>
-                                  <button className='py-2 px-5'>Sign Up</button>
+                                  <button className='py-2 px-5' disabled={loading}>Sign Up</button>
                                 </div>
                                 <h3 className='text-center'>Already have an account? <a href={'/auth/login'}>Sign in</a></h3>
                               </form>

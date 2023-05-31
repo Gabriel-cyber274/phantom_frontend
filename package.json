@@ -14,10 +14,18 @@
     "cookies-next": "^2.1.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.4.1",
-    "next": "13.4.1",
+    "next": "^13.4.3",
     "next-google-fonts": "^2.2.0",
     "react": "18.2.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
-    "react-toastify": "^9.1.2"
+    "react-toastify": "^9.1.2",
+    "sentiment": "^5.0.2",
+    "socket.io-client": "^4.6.1",
+    "wavesurfer.js": "^6.6.3"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.6",
+    "@types/react": "^18.2.7"
   }
 }
