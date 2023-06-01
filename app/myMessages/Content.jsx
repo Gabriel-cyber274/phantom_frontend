@@ -34,6 +34,7 @@ function Content() {
                     'Authorization': `Bearer ${token}`
                 },
             });
+            
             const res2 = await api.get(environment.room.recievedRooms, {
                 headers: {
                     'Content-Type' : 'applications/json',
@@ -81,7 +82,7 @@ function Content() {
 
     useEffect(() => {
         getRooms();
-    }, [finished, loadingMain])
+    }, [])
 
 
     useEffect(() => { 

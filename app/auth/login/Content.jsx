@@ -111,7 +111,7 @@ function Content({link}) {
                                 <div className='text-center mt-5 mb-3'>
                                   <button className='py-2 px-5' disabled={loading}>Login</button>
                                 </div>
-                                <h3 className='text-center'>Don't have an account? <a href="/auth/register">Sign up</a></h3>
+                                <h3 className='text-center'>{"Don't have an account?"} <a href="/auth/register">Sign up</a></h3>
                               </form>
                           </div>
                         </div>

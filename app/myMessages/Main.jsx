@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import avatars from '../../components/avatars'
 
 
+
 function Main({loadingMain, data, userInfo}) {
     let token = getCookie('token');
     const router = useRouter();
@@ -150,8 +151,7 @@ function Main({loadingMain, data, userInfo}) {
 
                             </div>
                             <div className='d-flex justify-content-center flex-column align-items-center px-3 py-5'>
-                                <p>Uh-oh! It seems like you don't have any texts yet. Don't worry, you can create your 
-                                    Phantom link and start sharing it with your contacts! Let the conversations begin!</p>
+                                <p>{"Uh-oh! It seems like you don't have any texts yet. Don't worry, you can create your Phantom link and start sharing it with your contacts! Let the conversations begin!"}</p>
                                 
                                 {loading && <div className="spinner-border text-primary" role="status">
                                 </div>}

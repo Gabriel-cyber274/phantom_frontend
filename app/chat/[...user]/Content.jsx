@@ -139,7 +139,7 @@ function Content({params}) {
         }
 
 
-    }, [exists]);
+    });
 
     useEffect(()=> {
         if(!loading) {

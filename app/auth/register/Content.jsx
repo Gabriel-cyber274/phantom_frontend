@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Link from 'next/link';
+import Image from 'next/image'
 
 
 
@@ -29,7 +30,7 @@ function Content() {
   }, 2500);
 
     return()=> clearTimeout(int);
-  }, [])
+  })
 
   useEffect (()=> {
     if("geolocation" in navigator) {
@@ -52,7 +53,7 @@ function Content() {
       setSupported(false);
       console.log('geolocation is not supported in your browser');
     }
-  });
+  }, [supported]);
 
   const signUp = async(e)=> {
     e.preventDefault();
@@ -100,14 +101,14 @@ function Content() {
   return (
     <>  
         {!show && <div className='text-center d-flex align-items-center justify-content-center img_Animate' style={{position: 'relative', zIndex: '1', height: '100vh'}}>
-            <img src="/assets/phantomL.png" alt="" />
+            <Image src="/assets/phantomL.png" alt="" />
         </div>}
         {show && 
           <div className='d-flex justify-content-center align-items-end' style={{width: '100%', height: '100%'}}>
             <div className='d-flex main_auth_dis_cont justify-content-center align-items-center' style={{width: '100%', }}>
                 <div className='main_auth_dis d-md-flex d-block position-relative align-items-center'>
                     <div className='first text-center'>
-                        <img src="/assets/phantomL.png" alt="" />
+                        <Image src="/assets/phantomL.png" alt="" />
                         <h2>Phantom</h2>
                     </div>
                     <div className={`second py-5 d-flex justify-content-center align-items-center`}>
@@ -154,18 +155,18 @@ function Content() {
                         </div>
                     </div>
                     <div className='position-absolute auth_page_des'>
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
-                        <img src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
+                        <Image src="/assets/design2.png" alt="" />
                     </div>
                 </div>
             </div>

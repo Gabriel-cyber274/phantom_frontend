@@ -7,6 +7,8 @@ import {environment} from '../../environment/environment'
 import { getCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
+
+
 function Content() {
     let token = getCookie('token');
     const [loading, setLoading] = useState(true);
@@ -131,7 +133,7 @@ function Content() {
                         </div>
                         {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length > 0 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>
@@ -144,7 +146,7 @@ function Content() {
 
                         {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length == 0 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div className={`second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`second mt-3 d-flex justify-content-between`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>
@@ -157,7 +159,7 @@ function Content() {
 
                         {displayData.length > 3 && displayData.length <= 22 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>

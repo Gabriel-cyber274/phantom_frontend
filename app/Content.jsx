@@ -88,7 +88,7 @@ function Content() {
     }
 
 
-  }, [url]);
+  }, [url, router,]);
 
 
 

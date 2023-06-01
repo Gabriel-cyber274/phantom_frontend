@@ -6,6 +6,7 @@ import { getCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
 
+
 function WelcomeScreens({setFinished}) {
     const [first, setFirst] = useState(true);
     let token = getCookie('token');
@@ -334,9 +335,9 @@ function WelcomeScreens({setFinished}) {
                             <img className='position-absolute img2' src="/assets/slide1.svg" alt=""/>                        
                         </div>
                         <div className='d-flex justify-content-center'>
-                            <p className='mb-4'>Discover Phantom app's unique color code for a vibrant messaging experience! Red for caution, 
-                                orange for partial positivity, and green for pure positivity. Let the colors be 
-                                your guide as you embark on the incredible journey of Phantom! 🌈</p>
+                            <p className='mb-4'>{"Discover Phantom app's unique color code for a vibrant messaging experience! Red for caution," + " " +
+                                "orange for partial positivity, and green for pure positivity. Let the colors be" + " " +
+                                "your guide as you embark on the incredible journey of Phantom! 🌈"}</p>
                         </div>
                     </div>
                 }

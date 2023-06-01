@@ -270,8 +270,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                     </g>
                     <defs>
                     <filter id="filter0_f_202_1813" x="0" y="0" width="45.5527" height="50.4579" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feFlood flood-opacity="0" result="BackgroundimgFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundimgFix" result="shape"/>
                     <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_202_1813"/>
                     </filter>
                     </defs>
@@ -294,8 +294,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                     </g>
                     <defs>
                     <filter id="filter0_f_202_1826" x="0" y="0" width="45.5527" height="50.4579" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feFlood flood-opacity="0" result="BackgroundimgFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundimgFix" result="shape"/>
                     <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_202_1826"/>
                     </filter>
                     </defs>
@@ -326,8 +326,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 </g>
 <defs>
 <filter id="filter0_f_203_2642" x="0" y="0" width="50.749" height="48.3048" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feFlood flood-opacity="0" result="BackgroundimgFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundimgFix" result="shape"/>
 <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_203_2642"/>
 </filter>
 </defs>
@@ -341,8 +341,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                     </g>
                     <defs>
                     <filter id="filter0_f_203_2646" x="0" y="0" width="50.749" height="48.3048" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feFlood flood-opacity="0" result="BackgroundimgFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundimgFix" result="shape"/>
                     <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_203_2646"/>
                     </filter>
                     </defs>
