@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Footer from '../../components/footer';
 import Nav from '../../components/nav';
@@ -15,8 +16,8 @@ function Content() {
                             </svg>
                         </div>
                     </div>
-                    <h2 className='mt-3'>Charles See</h2>
-                    <h5>Lagos, Nigeria</h5>
+                    <h2 className='mt-3 mb-2'>{JSON.parse(localStorage.currentUser)?.user.name}</h2>
+                    <h5>{JSON.parse(localStorage.currentUser)?.user.location}</h5>
                 </div>
             </div>
             <div className='d-flex justify-content-center mt-5'>
