@@ -52,7 +52,7 @@ function Content({params}) {
         }
 
     } catch (error) {
-        notify_err('error');
+        // notify_err('error');
     }
   }
 
@@ -92,7 +92,7 @@ function Content({params}) {
 
           console.log(res.data, 'message')  
       } catch (error) {
-          notify_err('error');
+        //   notify_err('error');
       }
   }
 
@@ -122,7 +122,8 @@ function Content({params}) {
         }
         
       } catch (error) {
-          notify_err('error');
+        //   notify_err('error');
+        console.log(error);
       }
   }
 
@@ -137,7 +138,6 @@ function Content({params}) {
         if(localStorage.link !== undefined) {
             localStorage.removeItem('link');
         }
-
 
     });
 
@@ -215,7 +215,7 @@ function Content({params}) {
                             </div>}         
                             {message.message == null && 
                                 <div className='vn_message'>
-                                    <Audio id={idx} sender_id={message.sender_id} src={environment.scheme + environment.baseUrl + environment.messages.voicenoteGet + message.voicenote.name} />
+                                    <Audio id={idx} sender_id={message.sender_id} src={environment.scheme + environment.baseUrl + environment.messages.voicenoteGet + message.voicenote?.name} />
                                 </div>
                             }
                             {message.message !== null && <p>{message.message}</p>}

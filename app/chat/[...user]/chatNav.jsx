@@ -33,7 +33,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
           setOnline(false);
       }
 
-      console.log(roomInfo);
+    //   console.log(roomInfo);
   })
 
   const blockRoom = async()=> {

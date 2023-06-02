@@ -76,13 +76,13 @@ function Content() {
 
         } catch (error) {
             setLoading(false);
-            notify_err('error');
+            // notify_err('error');
         }
     }
 
     useEffect(() => {
         getRooms();
-    }, [])
+    })
 
 
     useEffect(() => { 

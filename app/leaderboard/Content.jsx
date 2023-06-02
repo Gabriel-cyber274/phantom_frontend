@@ -58,7 +58,7 @@ function Content() {
             }
 
         } catch (error) {
-            notify_err('error')
+            // notify_err('error')
             setLoading(false);
             console.log(error);
         }
