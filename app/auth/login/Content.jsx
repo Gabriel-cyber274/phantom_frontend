@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Link from 'next/link';
 import { setCookie, deleteCookie } from 'cookies-next';
 
 
@@ -38,7 +39,7 @@ function Content({link}) {
     e.preventDefault();
     let url = baseUrl + environment.auth.login;
     if(e.target[0].value.length == 0 || e.target[1].value.length == 0) {
-      notify_err('fill form to signup');
+      notify_err('fill form to login');
     }
     else {
       let data = {
@@ -77,11 +78,11 @@ function Content({link}) {
 
   return (
     <>  
-        {!show && <div className='text-center d-flex align-items-center justify-content-center img_Animate' style={{position: 'relative', zIndex: '1', height: '100vh'}}>
-            <img src="/assets/phantomL.png" alt="" />
-        </div>}
+      {<div className='text-center d-flex align-items-center justify-content-center d-md-none' style={{position: 'relative', zIndex: '1', height: !show ? '90vh': '20vh', transition: '1s'}}>
+          <img src="/assets/phantomL.png" alt="" />
+      </div>}
         {show && 
-          <div className='d-flex justify-content-center align-items-end' style={{width: '100%', height: '100%'}}>
+          <div className='d-flex justify-content-center align-items-end removeAH' style={{width: '100%', height: '100%'}}>
             <div className='d-flex main_auth_dis_cont justify-content-center align-items-center' style={{width: '100%', }}>
                 <div className='main_auth_dis d-md-flex d-block position-relative align-items-center'>
                     <div className='first text-center'>

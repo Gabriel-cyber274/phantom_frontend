@@ -13,9 +13,11 @@ import Link from 'next/link';
 const baseUrl = environment.scheme + environment.baseUrl;
 function Content() {
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
   const router = useRouter();
   const [supported, setSupported] = useState(false);
   const [location, setLocation] = useState('');
+  const [small, setSmall] = useState(false);
   const [loading, setLoading] = useState(false);
 
 
@@ -26,8 +28,8 @@ function Content() {
 
   useEffect(()=> {
    let int = setTimeout(() => {
-      setShow(true);
-  }, 2500);
+        setShow(true);
+    }, 2500);
 
     return()=> clearTimeout(int);
   })
@@ -35,6 +37,7 @@ function Content() {
   useEffect (()=> {
     if("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position, 'test');
         const APIKEY = "004bfa912252b9d9cadcf4c1c3e55c50"; 
         let api = `http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${APIKEY}`
         fetch(api)
@@ -53,7 +56,16 @@ function Content() {
       setSupported(false);
       console.log('geolocation is not supported in your browser');
     }
-  }, [supported]);
+  }, [supported, location]);
+
+  useEffect(()=> {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if(mediaQuery.matches) {
+      setSmall(true)
+    }else {
+      setSmall(false);
+    }
+  }, [])
 
   const signUp = async(e)=> {
     e.preventDefault();
@@ -61,15 +73,15 @@ function Content() {
     if(e.target[0].value.length == 0 || e.target[1].value.length == 0 || e.target[2].value.length == 0 || e.target[3].value.length == 0) {
       notify_err('fill form to signup');
     }
-    else if(e.target[3].value !== e.target[4].value) {
+    else if(supported && e.target[3].value !== e.target[4].value || !supported && e.target[2].value !== e.target[3].value) {
       notify_err('confirm password is incorrect');
     }
     else {
       let data = {
         name: e.target[0].value,
         email: e.target[1].value,
-        location: e.target[2].value,
-        password: e.target[3].value,
+        location: supported ? location : 'unknown',
+        password: supported ? e.target[3].value : e.target[2].value,
       }
       
       try {
@@ -100,11 +112,11 @@ function Content() {
 
   return (
     <>  
-        {!show && <div className='text-center d-flex align-items-center justify-content-center img_Animate' style={{position: 'relative', zIndex: '1', height: '100vh'}}>
+        {<div className={`${!small && show && 'd-none'} text-center d-flex align-items-center justify-content-center`} style={{position: 'relative', zIndex: '1', height: !show ? '90vh': '20vh', transition: '1s'}}>
             <img src="/assets/phantomL.png" alt="" />
         </div>}
         {show && 
-          <div className='d-flex justify-content-center align-items-end' style={{width: '100%', height: '100%'}}>
+          <div className='d-flex justify-content-center align-items-end removeAH' style={{width: '100%', height: '100%'}}>
             <div className='d-flex main_auth_dis_cont justify-content-center align-items-center' style={{width: '100%', }}>
                 <div className='main_auth_dis d-md-flex d-block position-relative align-items-center'>
                     <div className='first text-center'>
@@ -128,12 +140,12 @@ function Content() {
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.502 13.449L0.802002 4.11902V16.119H22.207V4.11902L11.502 13.449ZM11.502 10.6351L0.802002 1.29803V0.261047H22.207V1.29803L11.502 10.6351Z" fill="white"/>
                                     </svg>
                                 </div>
-                                <div className='mt-3 position-relative'>
-                                    <input required value={location} onChange={(e)=> !supported && setLocation(e.target.value)} className='py-2 ps-1 px-4' type="text" placeholder='location' name="" id="" />
+                                {supported && <div className='mt-3 position-relative'>
+                                    <input required value={location} onChange={(e)=>  !supported && setLocation(e.target.value)} className='py-2 ps-1 px-4' type="text" placeholder='location' name="" id="" />
                                     <svg className='position-absolute' width="23" height="17" viewBox="0 0 23 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.502 13.449L0.802002 4.11902V16.119H22.207V4.11902L11.502 13.449ZM11.502 10.6351L0.802002 1.29803V0.261047H22.207V1.29803L11.502 10.6351Z" fill="white"/>
                                     </svg>
-                                </div>
+                                </div>}
                                 <div className='mt-3 position-relative'>
                                   <input  className='py-2 ps-1 px-4' type="password" placeholder='Password' name="" id="" />
                                   <svg className='position-absolute' width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
