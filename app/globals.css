@@ -227,6 +227,11 @@ a {
 
   color: #F5D716;
 }
+.aniTest {
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
 
 @media (max-width: 767px) {
   .auth_page_des {
@@ -240,9 +245,25 @@ a {
     background: transparent;
     box-shadow: none;
   }
+  .bigSA {
+    display: none !important;
+  }
   .main_auth_dis .second {
     width: 100%;
+    transform: translateY(200%);
+    height: 100vh;
+    animation: fadet 1s ease-out 1 forwards;
   }
+
+  @keyframes fadet {
+    0% {
+      transform: translateY(200%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
   .main_auth_dis .second .first_child {
     width: 90%;
   }
@@ -252,14 +273,25 @@ a {
 
   .authbg .animate {
     height: 25%;
-    transition: 0.9s;
+    transition: 1s;
   }
   .main_auth_dis .first {
     display: none;
   }
   .removeAH {
-    height: max-content !important;
+    /* height: 100vh; */
+    transition: 1s 2s;
+    /* display: none;
+    animation: fade 1s ease-in 4s 1 forwards; */
   }
+
+
+
+  .hide_flo {
+    /* visibility: hidden; */
+    opacity: 0;
+  }
+
   .img_Animate {
     height: 100vh;
     animation: move2 1s ease-out 1 forwards;

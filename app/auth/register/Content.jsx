@@ -16,7 +16,6 @@ function Content() {
   const router = useRouter();
   const [supported, setSupported] = useState(false);
   const [location, setLocation] = useState('');
-  const [small, setSmall] = useState(false);
   const [loading, setLoading] = useState(false);
 
 
@@ -57,14 +56,6 @@ function Content() {
     }
   }, [supported, location]);
 
-  useEffect(()=> {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    if(mediaQuery.matches) {
-      setSmall(true)
-    }else {
-      setSmall(false);
-    }
-  }, [])
 
   const signUp = async(e)=> {
     e.preventDefault();
@@ -112,13 +103,14 @@ function Content() {
   return (
     <>  
         <div className='authbg'>
-          <div className={`first ${show && 'animate'}`}>
+          <div className={`first ${show && 'animate'} position-relative`}>
               <img src="/assets/design.png" alt="" />
+              <div className='d-flex position-absolute aniTest justify-content-center align-items-center'>
+                <img style={{width: '166px', height: '136px'}} src="/assets/phantomL.png" alt="" />
+              </div>
           </div>
         </div>
-        {<div className={`${!small && show && 'd-none'} text-center d-flex align-items-center justify-content-center`} style={{position: 'relative', zIndex: '1', height: !show ? '95vh': '25vh', transition: '1s'}}>
-            <img src="/assets/phantomL.png" alt="" />
-        </div>}
+
         {show && 
           <div className='d-flex justify-content-center align-items-end removeAH' style={{width: '100%', height: '100%'}}>
             <div className='d-flex main_auth_dis_cont justify-content-center align-items-center' style={{width: '100%', }}>
