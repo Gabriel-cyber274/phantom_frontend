@@ -13,7 +13,6 @@ import Link from 'next/link';
 const baseUrl = environment.scheme + environment.baseUrl;
 function Content() {
   const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
   const router = useRouter();
   const [supported, setSupported] = useState(false);
   const [location, setLocation] = useState('');

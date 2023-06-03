@@ -13,6 +13,7 @@ import { setCookie, deleteCookie } from 'cookies-next';
 const baseUrl = environment.scheme + environment.baseUrl;
 function Content({link}) {
   const [show, setShow] = useState(false);
+  const [small, setSmall] = useState(false);
   const router = useRouter();
   const [loading,setLoading] = useState(false);
 
@@ -76,9 +77,18 @@ function Content({link}) {
 
   }
 
+  useEffect(()=> {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if(mediaQuery.matches) {
+      setSmall(true)
+    }else {
+      setSmall(false);
+    }
+  }, [])
+
   return (
     <>  
-      {<div className='text-center d-flex align-items-center justify-content-center d-md-none' style={{position: 'relative', zIndex: '1', height: !show ? '90vh': '20vh', transition: '1s'}}>
+      {<div className={`${!small && show && 'd-none'} text-center d-flex align-items-center justify-content-center`} style={{position: 'relative', zIndex: '1', height: !show ? '90vh': '20vh', transition: '1s'}}>
           <img src="/assets/phantomL.png" alt="" />
       </div>}
         {show && 
