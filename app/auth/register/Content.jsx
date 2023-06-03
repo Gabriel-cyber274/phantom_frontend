@@ -111,7 +111,12 @@ function Content() {
 
   return (
     <>  
-        {<div className={`${!small && show && 'd-none'} text-center d-flex align-items-center justify-content-center`} style={{position: 'relative', zIndex: '1', height: !show ? '90vh': '20vh', transition: '1s'}}>
+        <div className='authbg'>
+          <div className={`first ${show && 'animate'}`}>
+              <img src="/assets/design.png" alt="" />
+          </div>
+        </div>
+        {<div className={`${!small && show && 'd-none'} text-center d-flex align-items-center justify-content-center`} style={{position: 'relative', zIndex: '1', height: !show ? '95vh': '25vh', transition: '1s'}}>
             <img src="/assets/phantomL.png" alt="" />
         </div>}
         {show && 
