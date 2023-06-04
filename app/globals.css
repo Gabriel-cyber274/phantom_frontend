@@ -252,7 +252,7 @@ a {
     width: 100%;
     transform: translateY(200%);
     height: 100vh;
-    animation: fadet 1s ease-out 1 forwards;
+    animation: fadet 0.95s ease-out 1 forwards;
   }
 
   @keyframes fadet {
