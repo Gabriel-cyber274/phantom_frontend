@@ -237,6 +237,9 @@ a {
   .auth_page_des {
     display: none;
   }
+  .authbg {
+    position: fixed;
+  }
   .main_auth_dis {
     width: 100%;
     overflow: auto;

@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 function WelcomeScreens({setFinished}) {
     const [first, setFirst] = useState(true);
     let token = getCookie('token');
+    const [loading, setLoading] = useState(false);
     const [second, setSecond] = useState(false);
 
     const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -18,6 +19,7 @@ function WelcomeScreens({setFinished}) {
     } 
   
     const finished = async()=> {
+        setLoading(true);
         try {
             const data = {
                 tutorial: true,
@@ -30,21 +32,25 @@ function WelcomeScreens({setFinished}) {
                 },
             });
     
+            setLoading(false);
+
             if(res.data.success) {
                 setFinished(true);
             }else {
                 notify_err(res.data.message)
             }
         } catch (error) {
-            notify_err('error');
+            setLoading(false)
+            // notify_err('error');
         }
     }
 
     const nextSlide = ()=> {
-        if(first) {
+        if(first && !loading) {
             setSecond(true);
             setFirst(false);
-        }else {
+        }
+        else if (!first && !loading) {
             finished();
         }
     }

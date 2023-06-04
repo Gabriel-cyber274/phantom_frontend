@@ -1,39 +1,43 @@
 "use client"
 import React, {useEffect, useState} from 'react'
-import Footer from '../../components/footer'
-import api from '../../components/api';
-import {environment} from '../../environment/environment'
+import Footer from '../../../components/footer'
+import api from '../../../components/api';
+import {environment} from '../../../environment/environment'
 import { getCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
-import WelcomeScreens from './WelcomeScreens'
+import WelcomeScreens from '../WelcomeScreens'
+import Nav2 from '../../../components/nav2'
+import Main from '../Main'
 import { useRouter } from 'next/navigation';
-import Nav2 from '../../components/nav2'
-import Main from './Main'
 import io from 'socket.io-client';
+
+
 
 const socket = io.connect(environment.socketUrl); 
 function Content() {
     const [loading, setLoading] = useState(true);
     const [loadingMain, setLoadingMain] = useState(true);
-    const router = useRouter();
     let token = getCookie('token');
-    const [receivedRooms, setReceivedRooms] = useState([]);
+    const router = useRouter();
+    const [sentRooms, setSentRooms] = useState([]);
     const [finished, setFinished] = useState(false);
     const [userInfo, setUserInfo] = useState({})
+
 
     const notify_err = (res) => toast.error(res, { theme: "colored" });
     const notify = (res)=> {
       toast.success(res, { theme: "colored" })
     } 
-  
+
     const getRooms = async()=> {
         try {
-            const res2 = await api.get(environment.room.recievedRooms, {
+            const res = await api.get(environment.room.sentRooms, {
                 headers: {
                     'Content-Type' : 'applications/json',
                     'Authorization': `Bearer ${token}`
                 },
             });
+            
             
             const res3 = await api.get(environment.auth.info, {
                 headers: {
@@ -44,11 +48,12 @@ function Content() {
 
             setLoading(false);
             setLoadingMain(false);
-            
-            if(res2.data.success) {
-                setReceivedRooms(res2.data.rooms);
+
+
+            if(res.data.success) {
+                setSentRooms(res.data.rooms);
             }else {
-                notify_err(res2.data.message);
+                notify_err(res.data.message);
             }
             
 
@@ -65,36 +70,34 @@ function Content() {
             // notify_err('error');
         }
     }
-    
 
+  
     useEffect(() => {
         getRooms();
         socket.emit('onLine', JSON.parse(localStorage.currentUser).user.id)
-        
+    
         socket.emit('userRoom', JSON.parse(localStorage.currentUser).user.id);
     }, [])
 
-
+    
     useEffect(() => { 
-        socket.on('userUpdate', async (message)=> {
-            const res2 = await api.get(environment.room.recievedRooms, {
+        socket.on('userUpdate', async(message)=> {
+            const res = await api.get(environment.room.sentRooms, {
                 headers: {
                     'Content-Type' : 'applications/json',
                     'Authorization': `Bearer ${token}`
                 },
             });
-
-            if(res2.data.success) {
-                setReceivedRooms(res2.data.rooms);
+            
+            if(res.data.success) {
+                setSentRooms(res.data.rooms);
             }else {
-                notify_err(res2.data.message);
+                notify_err(res.data.message);
             }
         })
-      }, []);
+    }, []);
 
 
-    // socket.emit('joinRoom', params[1])
-    
     return (
         <div>
             {loading && 
@@ -110,8 +113,8 @@ function Content() {
 
             {!loading && finished &&
                 <div>
-                    <Nav2 data={receivedRooms} sent={false} setReceivedRooms={setReceivedRooms} loadingMain={loadingMain} />
-                    <Main userInfo={userInfo} data={receivedRooms} loadingMain={loadingMain} />
+                    <Nav2 data={sentRooms} sent={true} setSentRooms={setSentRooms} loadingMain={loadingMain} />
+                    <Main userInfo={userInfo} data={sentRooms} loadingMain={loadingMain} />
                     <Footer />
                 </div>
             }

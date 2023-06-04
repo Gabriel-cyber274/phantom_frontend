@@ -143,7 +143,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
     return (
         <> 
         <div className='chatNav_cont px-3 py-4 d-flex align-items-center justify-content-between'>
-            <div className='back' onClick={()=> router.push('myMessages')}>
+            <div className='back' onClick={router.back}>
                 <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 12L12 0L13.68 1.68L3.36 12L13.68 22.32L12 24L0 12Z" fill="#4052CB"/>
                 </svg>

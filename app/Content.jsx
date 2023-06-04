@@ -22,7 +22,6 @@ function Content() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({})
   const [url, setUrl] = useState('');
-  const [locationAll, setlocationAll] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -73,7 +72,7 @@ function Content() {
 
     } catch (error) {
       setLoading(false)
-      notify_err('error') 
+      // notify_err('error') 
     }
   }
 
@@ -127,7 +126,7 @@ function Content() {
         setUrl(res.data.phantom_link);
       }
     } catch (error) {
-      notify_err(error)
+      // notify_err(error)
     }
   }
 

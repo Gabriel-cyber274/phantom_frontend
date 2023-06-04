@@ -10,7 +10,7 @@ import avatars from '../../components/avatars'
 
 
 
-function Main({loadingMain, data, userInfo}) {
+function Main({loadingMain, data}) {
     let token = getCookie('token');
     const router = useRouter();
     const [url, setUrl] = useState('');
@@ -165,7 +165,7 @@ function Main({loadingMain, data, userInfo}) {
                     {data.length !== 0 && 
                         <div className='room_list_cont mt-5 pb-3'>
                             {data.map((room, idx)=> (
-                                <div key={idx} className='d-flex mb-5 align-items-center justify-content-between px-3' style={{cursor: 'pointer'}} onClick={()=> router.push(`/chat/${room.room_name}/${room.id}/${userInfo.id === room.user_id? room.creator_id: room.user_id}/${room.avatar}`)}>
+                                <div key={idx} className='d-flex mb-5 align-items-center justify-content-between px-3' style={{cursor: 'pointer'}} onClick={()=> router.push(`/chat/${room.room_name}/${room.id}/${JSON.parse(localStorage.currentUser).user.id === room.user_id? room.creator_id: room.user_id}/${room.avatar}`)}>
                                     <div>
                                         <img src={avatars[room.avatar]} alt=""/>
                                     </div>
@@ -175,17 +175,17 @@ function Main({loadingMain, data, userInfo}) {
                                             <span>{parseInt(room.messages.created_at.slice(room.messages.created_at.indexOf('T')+1, room.messages.created_at.indexOf('.')-3).slice(0, room.messages.created_at.slice(room.messages.created_at.indexOf('T')+1, room.messages.created_at.indexOf('.')-3).indexOf(':'))) < 12 ? room.messages.created_at.slice(room.messages.created_at.indexOf('T')+1, room.messages.created_at.indexOf('.')-3) + ' ' + 'AM' : room.messages.created_at.slice(room.messages.created_at.indexOf('T')+1, room.messages.created_at.indexOf('.')-3) + ' ' + 'PM'}</span>
                                         </div>
                                         <div className='d-flex align-items-center mt-2 justify-content-between'>
-                                            {room.messages.message !== null && <p style={{filter: (userInfo.id !== room.messages.sender_id && room.messages.seen == 0 && room.messages.type == 'bad') && 'blur(4px)'}}>{room.messages.message?.length >= 37? room.messages.message.slice(0,35) + '...' : room.messages.message}</p>}
+                                            {room.messages.message !== null && <p style={{filter: (JSON.parse(localStorage.currentUser).user.id !== room.messages.sender_id && room.messages.seen == 0 && room.messages.type == 'bad') && 'blur(4px)'}}>{room.messages.message?.length >= 37? room.messages.message.slice(0,35) + '...' : room.messages.message}</p>}
                                             
                                             {room.messages.message == null && <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7 0C7.79565 0 8.55871 0.316071 9.12132 0.87868C9.68393 1.44129 10 2.20435 10 3V9C10 9.79565 9.68393 10.5587 9.12132 11.1213C8.55871 11.6839 7.79565 12 7 12C6.20435 12 5.44129 11.6839 4.87868 11.1213C4.31607 10.5587 4 9.79565 4 9V3C4 2.20435 4.31607 1.44129 4.87868 0.87868C5.44129 0.316071 6.20435 0 7 0ZM14 9C14 12.53 11.39 15.44 8 15.93V19H6V15.93C2.61 15.44 0 12.53 0 9H2C2 10.3261 2.52678 11.5979 3.46447 12.5355C4.40215 13.4732 5.67392 14 7 14C8.32608 14 9.59785 13.4732 10.5355 12.5355C11.4732 11.5979 12 10.3261 12 9H14Z" fill="#F5D616"/>
                                             </svg>}
 
-                                            {userInfo.id !== room.messages.sender_id && (room.messages.seen == 0 || room.messages.seen == false) && 
+                                            {JSON.parse(localStorage.currentUser).user.id !== room.messages.sender_id && (room.messages.seen == 0 || room.messages.seen == false) && 
                                             <div className='d-flex typeS justify-content-center align-items-center' style={{background: room.messages.type == 'bad' ? '#FF0000': room.messages.type == 'good' ? '#98FF98': '#F5D616', color: room.messages.type == 'bad' && 'white' }}>
                                                 {room.unread?.length > 2? '99+': room.unread}
                                             </div>}
-                                            {userInfo.id == room.messages.sender_id && (room.messages.seen == 1 || room.messages.seen == true) && 
+                                            {JSON.parse(localStorage.currentUser).user.id == room.messages.sender_id && (room.messages.seen == 1 || room.messages.seen == true) && 
                                               <svg width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                               <path d="M18 0.890808L9.01869 11.1953L5.32994 7.50651M4.96908 11.2354L1.24023 7.50651M13.9103 0.890808L8.81821 6.7447" stroke="url(#paint0_linear_99_1286)" strokeWidth="0.855363" stroke-miterlimit="10" strokeLinecap="square"/>
                                               <defs>

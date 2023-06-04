@@ -90,7 +90,7 @@ function Content({params}) {
           }
 
 
-          console.log(res.data, 'message')  
+        //   console.log(res.data, 'message')  
       } catch (error) {
         //   notify_err('error');
       }
@@ -138,8 +138,10 @@ function Content({params}) {
         if(localStorage.link !== undefined) {
             localStorage.removeItem('link');
         }
+        
+        socket.emit('onLine', JSON.parse(localStorage.currentUser).user.id)
 
-    });
+    }, []);
 
     useEffect(()=> {
         if(!loading) {
@@ -152,19 +154,33 @@ function Content({params}) {
 
 
     useEffect(() => { 
-        socket.emit('onLine', JSON.parse(localStorage.currentUser).user.id)
         socket.on('usersOnline', message=> {
             setOnlineUsers(message)
         });
 
-        socket.on('getmessages', message=> {
-            getMessages();  
+        socket.on('getmessages', async (message)=> {      
+            const res = await api.get(environment.messages.getMessage + params[1], {
+                headers: {
+                    'Content-Type' : 'applications/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            
+            if(res.data.success) {
+                setMessages(res.data.messages)
+                setRoomInfo(res.data.room_info)
+            }
+            else {
+                notify_err(res.data.message)
+            }
+        
         });
     
         // return () => {
         //   socket.disconnect(); // Disconnect the socket when the component unmounts
         // };
-      }, [socket]);
+      }, []);
 
     const scrollToMesssage = (id)=> {
         let chat = document.querySelectorAll('.chat .mess');

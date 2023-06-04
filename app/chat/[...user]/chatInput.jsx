@@ -23,6 +23,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     const [audioFile, setAudioFile] = useState(null);
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
+    const [sending, setSending] = useState(false);
     const audioBRef = useRef(null); 
     
     
@@ -35,6 +36,8 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
 
     const createRoom = async(linkName, userId, message)=> {
+        setSending(true);
+
         try {
             const data = {
                 linkName: linkName,
@@ -59,6 +62,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     }
 
     const sendText = async(roomid, userId, message)=> {
+        setSending(true);
         let type;
         const sentiment = new Sentiment();
         const result = sentiment.analyze(message);
@@ -119,6 +123,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             }
             else if(!exists && res.data.success && audioUrl == null) {
                 router.refresh();
+                setSending(false);
                 setExists(true);
                 chatBodyRef.current.scrollIntoView({
                     behavior: 'smooth'
@@ -126,32 +131,35 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             }
             else if(res.data.success && exists && audioUrl == null) {
                 router.refresh();
+                setSending(false);
                 chatBodyRef.current.scrollIntoView({
                     behavior: 'smooth'
                 });
             }else {
                 notify_err(res.data.message);
+                setSending(false);
             }
         } catch (error) {
+            setSending(false);
             notify_err('error');
             console.log(error);
         }
     }
 
     const sendMessage = async()=> {
-        if(fullpath.length > 4 && !exists && !checkForLink(text)) {
+        if(fullpath.length > 4 && !exists && !checkForLink(text) && !sending) {
             createRoom(fullpath[5], fullpath[1], text);
         }
-        else if (fullpath.length > 4 && !exists && checkForLink(text)) {
+        else if (fullpath.length > 4 && !exists && checkForLink(text) && !sending) {
             notify_err("you can't send links")
         }
-        else if (exists && fullpath.length == 4 && allow == 0 && !checkForLink(text)) {
+        else if (exists && fullpath.length == 4 && allow == 0 && !checkForLink(text) && !sending) {
             sendText(fullpath[1], fullpath[2], text)
         }
-        else if (exists && fullpath.length == 4 && allow == 0 && checkForLink(text)) {
+        else if (exists && fullpath.length == 4 && allow == 0 && checkForLink(text) && !sending) {
             notify_err("you can't send links")
         }
-        else if (exists && fullpath.length == 4 && allow == 1) {
+        else if (exists && fullpath.length == 4 && allow == 1 && !sending) {
             sendText(fullpath[1], fullpath[2], text)
         }
 
@@ -216,6 +224,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
 
     const uploadAudio = async (id, data2, userId)=> {
+        setSending(true);
         try {
             const formData = new FormData();
             formData.append('file', audioFile)
@@ -234,6 +243,8 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             setAudioUrl(null)
             setAudioFile(null);
     
+            setSending(false);
+
             socket.emit('sendMessage', data2);
             socket.emit('userRoom', userId);
     
@@ -253,20 +264,20 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     }
     
 
-    const sendRecord = async()=> {       
-        if(fullpath.length > 4 && !exists && !checkForLink(text)) {
+    const sendRecord = async()=> { 
+        if(fullpath.length > 4 && !exists && !checkForLink(text) && !sending) {
             createRoom(fullpath[5], fullpath[1], text);
         }
-        else if (fullpath.length > 4 && !exists && checkForLink(text)) {
+        else if (fullpath.length > 4 && !exists && checkForLink(text) && !sending) {
             notify_err("you can't send links")
         }
-        else if (exists && fullpath.length == 4 && allow == 0 && !checkForLink(text)) {
+        else if (exists && fullpath.length == 4 && allow == 0 && !checkForLink(text) && !sending) {
             sendText(fullpath[1], fullpath[2], text)
         }
-        else if (exists && fullpath.length == 4 && allow == 0 && checkForLink(text)) {
+        else if (exists && fullpath.length == 4 && allow == 0 && checkForLink(text) && !sending) {
             notify_err("you can't send links")
         }
-        else if (exists && fullpath.length == 4 && allow == 1) {
+        else if (exists && fullpath.length == 4 && allow == 1 && !sending) {
             sendText(fullpath[1], fullpath[2], text)
         }
 
