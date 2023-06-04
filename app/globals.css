@@ -254,6 +254,9 @@ a {
     height: 100vh;
     animation: fadet 0.95s ease-out 1 forwards;
   }
+  .main_auth_dis .regS{
+    margin-top: 30px;
+  }
 
   @keyframes fadet {
     0% {

@@ -119,7 +119,7 @@ function Content() {
                         <img src="/assets/phantomL.png" alt="" />
                         <h2>Phantom</h2>
                     </div>
-                    <div className={`second py-5 d-flex justify-content-center align-items-center`}>
+                    <div className={`second py-5 d-flex regS justify-content-center align-items-center`}>
                         <div className='first_child'>
                           <div className='auth_form'>
                               <h2>Create Account</h2>
