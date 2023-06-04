@@ -253,6 +253,8 @@ a {
     transform: translateY(200%);
     height: 100vh;
     animation: fadet 0.95s ease-out 1 forwards;
+    position: fixed;
+    width: 100%;
   }
   .main_auth_dis .regS{
     margin-top: 30px;
