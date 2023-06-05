@@ -138,19 +138,21 @@ function Content({params}) {
         if(localStorage.link !== undefined) {
             localStorage.removeItem('link');
         }
+
         
-        socket.emit('onLine', JSON.parse(localStorage.currentUser).user.id)
-
-    }, []);
-
-    useEffect(()=> {
         if(!loading) {
             setUserInfo(JSON.parse(localStorage.currentUser).user)
             chatBodyRef.current.scrollIntoView({
                 behavior: 'smooth'
             });
         }
+        
+        socket.emit('onLine', JSON.parse(localStorage.currentUser).user.id)
+
     }, [loading]);
+
+    // useEffect(()=> {
+    // }, [loading]);
 
 
     useEffect(() => { 
@@ -158,7 +160,7 @@ function Content({params}) {
             setOnlineUsers(message)
         });
 
-        socket.on('getmessages', async (message)=> {      
+        socket.on('getmessages', async (message)=> {    
             const res = await api.get(environment.messages.getMessage + params[1], {
                 headers: {
                     'Content-Type' : 'applications/json',

@@ -98,7 +98,7 @@ function Content({link}) {
                     <div className={`second py-5 d-flex justify-content-center align-items-center`}>
                         <div className='first_child'>
                           <div className='auth_form'>
-                              <h2>Create Account</h2>
+                              <h2>Welcome!</h2>
                               <form action="" onSubmit={loginIn}>
                                 <div className='mt-3 position-relative'>
                                     <input className='py-2 ps-1 px-4' type="email" placeholder='Email' name="" id="" />

@@ -13,7 +13,7 @@ async function page({params, searchParams}) {
       redirect('/auth/login'+'/chat/'+params.user.join('/'));
     }
 
-    console.log(params.user);
+    // console.log(params.user);
 
 
     return (

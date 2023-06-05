@@ -115,6 +115,11 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
 
             setText('');
+
+            if(fullpath.length > 4 && audioUrl == null) {
+                window.location.reload();
+            }
+            
             if(!exists && res.data.success && audioUrl !== null) {
                 uploadAudio(res.data.sent.id, data2, userId)
             }
@@ -122,16 +127,16 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 uploadAudio(res.data.sent.id, data2, userId)
             }
             else if(!exists && res.data.success && audioUrl == null) {
-                router.refresh();
                 setSending(false);
+                router.refresh();
                 setExists(true);
                 chatBodyRef.current.scrollIntoView({
                     behavior: 'smooth'
                 });
             }
             else if(res.data.success && exists && audioUrl == null) {
-                router.refresh();
                 setSending(false);
+                router.refresh();
                 chatBodyRef.current.scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -247,8 +252,13 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
             socket.emit('sendMessage', data2);
             socket.emit('userRoom', userId);
+            
+            if(fullpath.length > 4) {
+                window.location.reload();
+            }else {
+                router.refresh();
+            }
     
-            router.refresh();
             if(res.data.success) {
                 chatBodyRef.current.scrollIntoView({
                     behavior: 'smooth'
