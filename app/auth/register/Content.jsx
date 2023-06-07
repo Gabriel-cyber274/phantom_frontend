@@ -37,7 +37,7 @@ function Content() {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position, 'test');
         const APIKEY = "004bfa912252b9d9cadcf4c1c3e55c50"; 
-        let api = `http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${APIKEY}`
+        let api = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${APIKEY}`
         fetch(api)
         .then(response => response.json())
         .then(data => {
