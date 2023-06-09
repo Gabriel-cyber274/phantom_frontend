@@ -10,12 +10,14 @@ export const environment = {
   
     // **********************************
     production: false,
-    scheme: 'http://',
-    baseUrl: 'localhost:8000/api/',
+    scheme: 'https://',
+    // baseUrl: 'localhost:8000/api/',
+    baseUrl: 'phantomlaravel.org.ng/api/',
     app_url: 'http://localhost:3000/',
     socketUrl: 'http://localhost:4000',
     fileUrl: '127.0.0.1:8000/',
   
+    // https://phantomlaravel.org.ng/laravel
     // *************************************
     // production: true,
     // scheme: 'https://',

@@ -44,7 +44,7 @@ function Content() {
       const res = await axios.get(baseUrl + environment.link.get, {
         headers: {
             'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -55,7 +55,7 @@ function Content() {
       const res2 = await axios.post(baseUrl + environment.auth.addAvatar, data,  {
         headers: {
             'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -112,12 +112,15 @@ function Content() {
   const createLink = async() => {
     try {
       const data = {
-        url: 'http://localhost:3000/chat/user'
+        url: 'https://phantom-frontend-651g.vercel.app/chat/user'
       }
+
       const res = await axios.post(baseUrl + environment.link.create, data, {
         headers: {
             'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
+            // 'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         },
       });
       if(res.data.success) {
