@@ -33,6 +33,9 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
           setOnline(false);
       }
 
+    
+
+    //   console.log(document.referrer, 'hello')
     //   console.log(roomInfo);
   })
 
