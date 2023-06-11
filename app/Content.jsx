@@ -43,19 +43,9 @@ function Content() {
     try {
       const res = await axios.get(baseUrl + environment.link.get, {
         headers: {
-            'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      const data = {
-        'available': avatars.length-1
-      }
- 
-      const res2 = await axios.post(baseUrl + environment.auth.addAvatar, data,  {
-        headers: {
-            'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+          'Accept' : 'applications/json',
+          'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -66,6 +56,20 @@ function Content() {
         setUrl('')
       }
 
+
+      const data = {
+        'available': avatars.length-1
+      }
+ 
+      const res2 = await axios.post(baseUrl + environment.auth.addAvatar, data,  {
+        headers: {
+            'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+            'Accept' : 'applications/json',
+            'Authorization': `Bearer ${token}`,
+        },
+      });
+
+
       if(!res2.data.success) {
         notify_err(res2.data.message);
       }
@@ -73,6 +77,7 @@ function Content() {
     } catch (error) {
       setLoading(false)
       // notify_err('error') 
+      console.log(error, 'ebuka');
     }
   }
 
@@ -117,8 +122,9 @@ function Content() {
 
       const res = await axios.post(baseUrl + environment.link.create, data, {
         headers: {
-            'Content-Type' : 'applications/json',
-            'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+          'Accept' : 'applications/json',
+          'Authorization': `Bearer ${token}`,
             // 'Access-Control-Allow-Origin': '*',
             // 'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         },
@@ -130,6 +136,7 @@ function Content() {
       }
     } catch (error) {
       // notify_err(error)
+      console.log(error, 'ebuka');
     }
   }
 

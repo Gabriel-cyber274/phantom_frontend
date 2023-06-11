@@ -45,8 +45,9 @@ function Content() {
         try {
             const res = await api.get(environment.reviews.main, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
             if(res.data.success) {

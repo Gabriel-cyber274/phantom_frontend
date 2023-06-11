@@ -45,8 +45,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             }
             const res = await api.post(environment.room.create, data, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
             if(res.data.success) {
@@ -95,8 +96,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
             const res = await api.post(reply == null ? environment.messages.sendMessage : environment.messages.sendReply, audioUrl == null ? data : data3, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
@@ -239,8 +241,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 url: environment.messages.voiceNote,  
                 method: 'POST',
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
                 data: formData,
             });

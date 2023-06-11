@@ -33,16 +33,18 @@ function Content() {
         try {
             const res = await api.get(environment.room.sentRooms, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
             
             
             const res3 = await api.get(environment.auth.info, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
@@ -84,8 +86,9 @@ function Content() {
         socket.on('userUpdate', async(message)=> {
             const res = await api.get(environment.room.sentRooms, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
             

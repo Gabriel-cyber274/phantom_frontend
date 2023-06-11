@@ -27,8 +27,9 @@ function WelcomeScreens({setFinished}) {
 
             const res = await api.put(environment.tutorial.main, {data: data}, {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
     

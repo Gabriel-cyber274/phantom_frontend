@@ -35,8 +35,9 @@ function Content({params}) {
     try {
         const res = await api.get(environment.messages.read + params[1], {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -60,8 +61,9 @@ function Content({params}) {
       try {  
           const res = await api.get(environment.messages.getMessage + params[1], {
               headers: {
-                  'Content-Type' : 'applications/json',
-                  'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
               },
           });
           
@@ -100,15 +102,17 @@ function Content({params}) {
       try {
         const res = await api.get(environment.room.checkRoom + params[params.length > 4 ? 1: params.length-2], {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
         
         const res2 = await api.get(environment.auth.info, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -163,8 +167,9 @@ function Content({params}) {
         socket.on('getmessages', async (message)=> {    
             const res = await api.get(environment.messages.getMessage + params[1], {
                 headers: {
-                    'Content-Type' : 'applications/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                    'Accept' : 'applications/json',
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 

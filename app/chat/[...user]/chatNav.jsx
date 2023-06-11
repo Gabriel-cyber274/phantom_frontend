@@ -43,8 +43,9 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
         }
         const res = await api.put(environment.room.blockUser, data, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -69,8 +70,9 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.reportUser, data, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -94,8 +96,9 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.revealProfile, data, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 
@@ -119,8 +122,9 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.allowLinks, data, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
             },
         });
 

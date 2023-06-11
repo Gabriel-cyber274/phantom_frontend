@@ -33,8 +33,9 @@ function Main({loadingMain, data}) {
         try {
           const res = await api.get(environment.link.get, {
             headers: {
-                'Content-Type' : 'applications/json',
-                'Authorization': `Bearer ${token}`
+              'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+              'Accept' : 'applications/json',
+              'Authorization': `Bearer ${token}`,
             },
           });
           setLoading(false);
@@ -60,8 +61,9 @@ function Main({loadingMain, data}) {
             }
             const res = await api.post(environment.link.create, data, {
               headers: {
-                  'Content-Type' : 'applications/json',
-                  'Authorization': `Bearer ${token}`
+                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                'Accept' : 'applications/json',
+                'Authorization': `Bearer ${token}`,
               },
             });
             if(res.data.success) {
