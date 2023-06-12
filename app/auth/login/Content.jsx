@@ -116,7 +116,12 @@ function Content({link}) {
                                     <a href="">FORGOT PASSWORD?</a>
                                 </div>
                                 <div className='text-center mt-5 mb-3'>
-                                  <button className='py-2 px-5' disabled={loading}>Login</button>
+                                  {!loading && <button className='py-2 px-5' >Login</button>}
+                                  {loading && <div className='loadingAuth'>
+                                      <div className="spinner-border text-primary" role="status">
+                                      </div>
+                                  </div>}
+                                  
                                 </div>
                                 <h3 className='text-center'>{"Don't have an account?"} <a href="/auth/register">Sign up</a></h3>
                               </form>

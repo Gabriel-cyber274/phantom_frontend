@@ -111,8 +111,8 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             }
 
             if(audioUrl == null) {
-                socket.emit('sendMessage', data2);
-                socket.emit('userRoom', userId);
+                // socket.emit('sendMessage', data2);
+                // socket.emit('userRoom', userId);
             }
 
 
@@ -253,8 +253,8 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     
             setSending(false);
 
-            socket.emit('sendMessage', data2);
-            socket.emit('userRoom', userId);
+            // socket.emit('sendMessage', data2);
+            // socket.emit('userRoom', userId);
             
             if(fullpath.length > 4) {
                 window.location.reload();
