@@ -118,9 +118,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
             setText('');
 
-            // if(fullpath.length > 4 && audioUrl == null) {
-            //     window.location.reload();
-            // }
+            if(fullpath.length > 4 && audioUrl == null) {
+                window.location.reload();
+            }
             
             if(!exists && res.data.success && audioUrl !== null) {
                 uploadAudio(res.data.sent.id, data2, userId)
@@ -256,11 +256,11 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             socket.emit('sendMessage', data2);
             socket.emit('userRoom', userId);
             
-            // if(fullpath.length > 4) {
-            //     window.location.reload();
-            // }else {
+            if(fullpath.length > 4) {
+                window.location.reload();
+            }else {
                 router.refresh();
-            // }
+            }
     
             setSending(false);
             if(res.data.success) {
