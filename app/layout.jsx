@@ -25,6 +25,9 @@ export default function RootLayout({ children }) {
       <head>
         {/* <meta name="csrf-token" content="{{ csrf_token() }}" /> */}
         <title>phantom</title>
+        <meta name="description" content="Phantom application" />
+        <meta name="title" content="Phantom" />
+        {/* <meta name="author" content="Gtec" /> */}
       </head>
       <body className={inter.className}>{children}</body>
     </html>

@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 import Waveform from '../../../components/audioD'
 
 
-// const socket = io.connect(environment.socketUrl); 
+const socket = io.connect(environment.socketUrl); 
 
 function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply, reply, allow}) {
     let token = getCookie('token');
@@ -110,10 +110,10 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 user_id: userId,
             }
 
-            // if(audioUrl == null) {
-            //     // socket.emit('sendMessage', data2);
-            //     // socket.emit('userRoom', userId);
-            // }
+            if(audioUrl == null) {
+                socket.emit('sendMessage', data2);
+                socket.emit('userRoom', userId);
+            }
 
 
             setText('');
@@ -253,8 +253,8 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     
             setSending(false);
 
-            // socket.emit('sendMessage', data2);
-            // socket.emit('userRoom', userId);
+            socket.emit('sendMessage', data2);
+            socket.emit('userRoom', userId);
             
             if(fullpath.length > 4) {
                 window.location.reload();
