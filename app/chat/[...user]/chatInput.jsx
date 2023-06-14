@@ -339,7 +339,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             <div className='chatInput_cont px-3 pt-2 pb-4'>
                 <div className='d-flex justify-content-between align-items-center'>
                     {audioUrl == null && <form action="" onSubmit={(e)=> e.preventDefault()} className='position-relative'>
-                        <input value={text} onChange={(e)=> setText(e.target.value)} type="text" className='py-3 rounded-pill pe-3' placeholder='Type message ...' />
+                        <input value={text} onTouchStart={(e)=> e.preventDefault()} onChange={(e)=> setText(e.target.value)} type="text" className='py-3 rounded-pill pe-3' placeholder='Type message ...' />
                         <div className='position-absolute emojiF'>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 0C3.58187 0 0 3.58187 0 8C0 12.4181 3.58187 16 8 16C12.4181 16 16 12.4181 16 8C16 3.58187 12.4181 0 8 0ZM8 15.3333C3.95627 15.3333 0.666667 12.0437 0.666667 8C0.666667 3.95627 3.95627 0.666667 8 0.666667C12.0435 0.666667 15.3333 3.95627 15.3333 8C15.3333 12.0437 12.0435 15.3333 8 15.3333Z" fill="#3A3A3A" fillOpacity="0.8"/>
