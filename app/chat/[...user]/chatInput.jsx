@@ -33,18 +33,18 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
       toast.success(res, { theme: "colored" })
     } 
 
-    useEffect(() => {
-        const handleTouchStart = (event) => {
-          event.preventDefault();
-        };
+    // useEffect(() => {
+    //     const handleTouchStart = (event) => {
+    //       event.preventDefault();
+    //     };
     
-        const inputField = document.getElementById('myInputC');
-        inputField.addEventListener('touchstart', handleTouchStart);
+    //     const inputField = document.getElementById('myInputC');
+    //     inputField.addEventListener('touchstart', handleTouchStart);
     
-        return () => {
-          inputField.removeEventListener('touchstart', handleTouchStart);
-        };
-    }, []);
+    //     return () => {
+    //       inputField.removeEventListener('touchstart', handleTouchStart);
+    //     };
+    // }, []);
 
 
     const createRoom = async(linkName, userId, message)=> {
