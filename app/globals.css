@@ -1232,7 +1232,7 @@ h1,h2,h3,h4,h5,h6, p {
   top: 0;
 }
 .reply_main_cont {
-  bottom: 100px;
+  bottom: 12.2%;
   width: 100%;
   z-index: 500;
 }
