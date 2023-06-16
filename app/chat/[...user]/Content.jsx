@@ -252,9 +252,10 @@ function Content({params}) {
                         bounds={{ left: -10, right: 200 }}
                         grid={[25, 25]}
                         scale={1}
-                          onStart={()=> {handleStart(idx); setMessageR(message)}}
-                          onDrag={handleDrag}
-                          onStop={handleStop}
+                        onStart={()=> {handleStart(idx); setMessageR(message)}}
+                        onDrag={handleDrag}
+                        onStop={handleStop}
+                        key={idx}
                         >
                         <div style={{cursor:'move'}}>
                             <div className={`${message.sender_id !== userInfo.id ?'friend': 'me'} mess handle position-relative mess mb-5 p-2`} id={message.id}>
