@@ -215,14 +215,17 @@ function Content({params}) {
 
     
     const handleStart = (e, id)=> {
+        console.log(e, 'start')
         setMessageId(id)
     }
 
     const handleDrag = (e, data)=> {
+        console.log(e, 'drag')
         setPosition({ x: data.x, y: data.y });
     }
 
     const handleStop = (e)=> {
+        console.log(e, 'stop')
         setPosition(defaultPosition);
         setReply(messageR)
     }
@@ -249,10 +252,10 @@ function Content({params}) {
                         cancel=".clickable"
                         defaultPosition={defaultPosition}
                         position={messageId == idx ? position : defaultPosition}
-                        bounds={{ left: -10, right: 200 }}
+                        bounds={{ left: -10, right: 200, top:0, bottom:0 }}
                         grid={[25, 25]}
                         scale={1}
-                        onStart={()=> {handleStart(idx); setMessageR(message)}}
+                        onStart={(e)=> {handleStart(e, idx); setMessageR(message)}}
                         onDrag={handleDrag}
                         onStop={handleStop}
                         key={idx}

@@ -16,9 +16,11 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
   const [blockShow, setBlockShow] = useState(false); 
   const [reportShow, setReportShow] = useState(false);
   const [revealShow, setRevealShow] = useState(false);
+  const [linkShow, setLinkShow] = useState(false);
   const [blockSuccess, setBlockSuccess] = useState(false);
   const [repostSuccess, setReportSucess] = useState(false);
   const [revealSuccess, setRevealSuccess] = useState(false);
+  const [linkSuccess, setLinkSuccess] = useState(false);
 
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -46,8 +48,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
         }
         const res = await api.put(environment.room.blockUser, data, {
             headers: {
-                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
-                'Accept' : 'applications/json',
+                // 'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                // 'Accept' : 'applications/json',
                 'Authorization': `Bearer ${token}`,
             },
         });
@@ -73,8 +75,6 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.reportUser, data, {
             headers: {
-                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
-                'Accept' : 'applications/json',
                 'Authorization': `Bearer ${token}`,
             },
         });
@@ -99,8 +99,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.revealProfile, data, {
             headers: {
-                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
-                'Accept' : 'applications/json',
+                // 'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                // 'Accept' : 'applications/json',
                 'Authorization': `Bearer ${token}`,
             },
         });
@@ -125,12 +125,13 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         const res = await api.put(environment.room.allowLinks, data, {
             headers: {
-                'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
-                'Accept' : 'applications/json',
+                // 'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+                // 'Accept' : 'applications/json',
                 'Authorization': `Bearer ${token}`,
             },
         });
 
+        router.refresh();
         if(res.data.success) {
             setBlockShow(false);
             setRevealSuccess(false)
@@ -138,7 +139,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
             setReportSucess(false)
             setRevealShow(false)
             setReportShow(false);
-            notify(res.data.message);
+            setLinkShow(false)
+            setLinkSuccess(true)
         } else {
             notify_err(res.data.message);
         }
@@ -172,10 +174,10 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && roomInfo.links == 0 && allowLinks()}><span>{roomInfo.links == 0 ? 'Allow Links' : 'Links Allowed'}</span></Dropdown.Item>
-                            <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 &&  setRevealShow(true)}><span>Reveal Profile</span></Dropdown.Item>
-                            <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setReportShow(true)}><span style={{color: '#F9CA1C'}}>Report User</span></Dropdown.Item>
-                            <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setBlockShow(true)}><span style={{color: '#F6521E'}}>{roomInfo.block !== 1 ? 'Block User' : 'room locked'}</span></Dropdown.Item>
+                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && roomInfo.links == 0 && setLinkShow(true)}><span>{roomInfo.links == 0 ? 'Allow Links' : 'Links Allowed'}</span></Dropdown.Item>}
+                            {roomInfo.user_id !== JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 &&  setRevealShow(true)}><span>Reveal Profile</span></Dropdown.Item>}
+                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setReportShow(true)}><span style={{color: '#F9CA1C'}}>Report User</span></Dropdown.Item>}
+                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setBlockShow(true)}><span style={{color: '#F6521E'}}>{roomInfo.block !== 1 ? 'Block User' : 'room locked'}</span></Dropdown.Item>}
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -242,6 +244,61 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                     <p>Revealing your profile to would forfeit the anonymity and unveil your true identity. </p>
                     <h1 className='my-4'>Are You willing to reveal your Profile?</h1>
                     <button className='py-2 px-4' onClick={profileReview}>Reveal Profile</button>
+                  </div>
+              </div>
+          </Modal.Body>
+        </Modal>
+
+        
+        <Modal centered show={linkShow} onHide={()=> setLinkShow(false)}>
+          <Modal.Body>
+              <div className='block_modal_cont position-relative link_modal_cont'>
+                  <div className='d-flex justify-content-end py-2 position-relative' style={{zIndex: '3'}}>
+                    <svg onClick={()=> setLinkShow(false)} width="9" height="8" viewBox="0 0 9 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.18737 0.203526C1.31239 0.0785449 1.48192 0.00833454 1.65869 0.00833454C1.83546 0.00833454 2.005 0.0785449 2.13001 0.203526L4.99193 3.06553L7.85384 0.203526C7.91534 0.139852 7.9889 0.0890639 8.07023 0.0541246C8.15157 0.0191852 8.23904 0.000794382 8.32756 2.51714e-05C8.41608 -0.00074404 8.50386 0.0161236 8.58579 0.0496442C8.66772 0.0831648 8.74215 0.132667 8.80474 0.195262C8.86734 0.257857 8.91684 0.332292 8.95036 0.414223C8.98388 0.496154 9.00074 0.58394 8.99998 0.67246C8.99921 0.760979 8.98082 0.848459 8.94588 0.929795C8.91094 1.01113 8.86015 1.08469 8.79648 1.14619L5.93457 4.00819L8.79648 6.87019C8.91792 6.99593 8.98511 7.16433 8.98359 7.33913C8.98207 7.51392 8.91196 7.68113 8.78836 7.80474C8.66476 7.92834 8.49755 7.99846 8.32276 7.99997C8.14797 8.00149 7.97957 7.9343 7.85384 7.81286L4.99193 4.95086L2.13001 7.81286C2.00428 7.9343 1.83588 8.00149 1.66109 7.99997C1.4863 7.99846 1.3191 7.92834 1.19549 7.80474C1.07189 7.68113 1.00178 7.51392 1.00026 7.33913C0.998743 7.16433 1.06594 6.99593 1.18737 6.87019L4.04929 4.00819L1.18737 1.14619C1.0624 1.02117 0.992188 0.851635 0.992188 0.674859C0.992188 0.498083 1.0624 0.328544 1.18737 0.203526Z" fill="#3A3A3A" fill-opacity="0.8"/>
+                    </svg>
+                  </div>
+                  <div className='d-flex flex-column align-items-center justify-content-center'>
+                    <p>Protect your privacy. Safety first </p>
+                    <h1 className='my-4'>Are You willing to Allow links?</h1>
+                    <button className='py-2 px-4' onClick={allowLinks}>Allow links</button>
+                  </div>
+                  <div className='modD d-flex justify-content-between pt-4'>
+                    <svg width="18" className='firstM' height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_237_1263)">
+                    <path d="M14.9622 3.03778C15.6268 3.70474 16 4.60793 16 5.54949C16 6.49105 15.6268 7.39424 14.9622 8.0612L13.7022 9.31293C13.5467 9.4685 13.3803 9.60604 13.2056 9.72568C12.0924 10.4878 11.4947 9.01332 12.4505 8.0612L13.0764 7.42709L13.7022 6.80123C14.394 6.10948 14.394 4.9895 13.7022 4.29775C13.539 4.13143 13.3442 3.99931 13.1293 3.90912C12.9143 3.81893 12.6836 3.77247 12.4505 3.77247C12.2174 3.77247 11.9867 3.81893 11.7718 3.90912C11.5568 3.99931 11.3621 4.13143 11.1988 4.29775L10.5647 4.92362L10.3919 5.09642C9.23851 6.24979 7.53369 5.45112 8.68707 4.29775L9.9388 3.03778C10.6058 2.37318 11.5089 2 12.4505 2C13.3921 2 14.2953 2.37318 14.9622 3.03778ZM7.42709 11.8246L11.8246 7.42709C12.1705 7.08122 12.1705 6.52123 11.8246 6.17536C11.4623 5.82125 10.8941 5.85419 10.5647 6.17536L6.17536 10.5729C5.82948 10.9188 5.82948 11.4788 6.17536 11.8246C6.5377 12.1788 7.10593 12.1458 7.42709 11.8246ZM6.80123 13.7105L7.60301 12.9068C8.75857 11.7484 10.4699 12.5453 9.31293 13.7022L8.0612 14.9622C7.39424 15.6268 6.49105 16 5.54949 16C4.60793 16 3.70474 15.6268 3.03778 14.9622C2.37318 14.2953 2 13.3921 2 12.4505C2 11.5089 2.37318 10.6058 3.03778 9.9388L4.29775 8.68707C5.45194 7.53288 6.25236 9.23945 5.09957 10.395L4.29775 11.1988C3.59777 11.8905 3.59777 13.0105 4.29775 13.7105C4.9895 14.4022 6.10948 14.4022 6.80123 13.7105Z" fill="url(#paint0_linear_237_1263)"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_f_237_1263" x="0" y="0" width="18" height="18" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_237_1263"/>
+                    </filter>
+                    <linearGradient id="paint0_linear_237_1263" x1="0.638356" y1="3.15964" x2="17.5236" y2="14.4697" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.111608" stop-color="#FF0000"/>
+                    <stop offset="1" stop-color="#3A3A3A"/>
+                    </linearGradient>
+                    </defs>
+                    </svg>
+
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_237_1262)">
+                    <path d="M14.9622 3.03778C15.6268 3.70474 16 4.60793 16 5.54949C16 6.49105 15.6268 7.39424 14.9622 8.0612L13.7022 9.31293C13.5467 9.46851 13.3803 9.60604 13.2056 9.72568C12.0924 10.4878 11.4947 9.01332 12.4505 8.0612V8.0612L13.0764 7.42709L13.7022 6.80123C14.394 6.10948 14.394 4.9895 13.7022 4.29775C13.539 4.13143 13.3442 3.99931 13.1293 3.90912C12.9143 3.81893 12.6836 3.77247 12.4505 3.77247C12.2174 3.77247 11.9867 3.81893 11.7718 3.90912C11.5568 3.99931 11.3621 4.13143 11.1988 4.29775L10.5647 4.92362L10.3919 5.09642C9.23851 6.24979 7.53369 5.45112 8.68707 4.29775V4.29775L9.9388 3.03778C10.6058 2.37318 11.5089 2 12.4505 2C13.3921 2 14.2953 2.37318 14.9622 3.03778ZM7.42709 11.8246L11.8246 7.42709C12.1705 7.08122 12.1705 6.52123 11.8246 6.17536C11.4623 5.82125 10.8941 5.85419 10.5647 6.17536L6.17536 10.5729C5.82948 10.9188 5.82948 11.4788 6.17536 11.8246C6.5377 12.1788 7.10593 12.1458 7.42709 11.8246ZM6.80123 13.7105L7.60301 12.9068C8.75857 11.7484 10.4699 12.5453 9.31293 13.7022V13.7022L8.0612 14.9622C7.39424 15.6268 6.49105 16 5.54949 16C4.60793 16 3.70474 15.6268 3.03778 14.9622C2.37318 14.2953 2 13.3921 2 12.4505C2 11.5089 2.37318 10.6058 3.03778 9.9388L4.29775 8.68707V8.68707C5.45194 7.53288 6.25236 9.23945 5.09957 10.395L4.29775 11.1988C3.59777 11.8905 3.59777 13.0105 4.29775 13.7105C4.9895 14.4022 6.10948 14.4022 6.80123 13.7105Z" fill="url(#paint0_linear_237_1262)"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_f_237_1262" x="0" y="0" width="18" height="18" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_237_1262"/>
+                    </filter>
+                    <linearGradient id="paint0_linear_237_1262" x1="0.638356" y1="3.15964" x2="17.5236" y2="14.4697" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.111608" stop-color="#FF0000"/>
+                    <stop offset="1" stop-color="#3A3A3A"/>
+                    </linearGradient>
+                    </defs>
+                    </svg>
+
+
                   </div>
               </div>
           </Modal.Body>
@@ -377,6 +434,28 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                         </svg>
                     </div>
                     <h1 className='pb-3'>Your Profile is Now visible to this user</h1>
+                </div>
+            </Modal.Body>
+            </Modal>
+
+            
+            <Modal centered show={linkSuccess} onHide={()=> setLinkSuccess(false)}>
+            <Modal.Body>
+                <div className='successModalF'>
+                    <div className='d-flex py-4 justify-content-center'>
+                        <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.8095 30.3807C24.1989 30.3807 30.9998 23.5797 30.9998 15.1903C30.9998 6.80094 24.1989 0 15.8095 0C7.42008 0 0.619141 6.80094 0.619141 15.1903C0.619141 23.5797 7.42008 30.3807 15.8095 30.3807Z" fill="url(#paint0_linear_237_1434)"/>
+                        <path d="M23.2889 8.77881C23.4804 8.93547 20.643 12.7534 16.9528 17.3023L14.7131 20.0178L14.4056 20.3892L14.0807 20.0526C11.1795 17.0761 9.22418 14.8712 9.36343 14.7319C9.50269 14.5927 11.7133 16.5597 14.6841 19.4434L14.0575 19.5072L16.2507 16.7627C19.941 12.1847 23.0916 8.62215 23.2889 8.77881Z" fill="white"/>
+                        <defs>
+                        <linearGradient id="paint0_linear_237_1434" x1="-2.33569" y1="2.51647" x2="34.3062" y2="27.0599" gradientUnits="userSpaceOnUse">
+                        <stop offset="0.111608" stop-color="#FF0000"/>
+                        <stop offset="1" stop-color="#3A3A3A"/>
+                        </linearGradient>
+                        </defs>
+                        </svg>
+
+                    </div>
+                    <h1 className='pb-3'>Link sharing successfully enabled</h1>
                 </div>
             </Modal.Body>
             </Modal>
