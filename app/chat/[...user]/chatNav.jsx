@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { getCookie } from 'cookies-next';
 
 
-function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
+function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply, setReply, messageR, setMessageId}) {
   const router = useRouter();
   let token = getCookie('token');
   const [online, setOnline] = useState(false);
@@ -54,6 +54,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
             },
         });
 
+        router.refresh();
+
         if(res.data.success) {
             setBlockShow(false);
             setBlockSuccess(true);
@@ -78,6 +80,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                 'Authorization': `Bearer ${token}`,
             },
         });
+
+        router.refresh();
 
         if(res.data.success) {
             setReportShow(false);
@@ -104,6 +108,8 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                 'Authorization': `Bearer ${token}`,
             },
         });
+
+        router.refresh();
 
         if(res.data.success) {
             setRevealShow(false);
@@ -133,12 +139,12 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
 
         router.refresh();
         if(res.data.success) {
-            setBlockShow(false);
-            setRevealSuccess(false)
-            setBlockSuccess(false)
-            setReportSucess(false)
-            setRevealShow(false)
-            setReportShow(false);
+            // setBlockShow(false);
+            // setRevealSuccess(false)
+            // setBlockSuccess(false)
+            // setReportSucess(false)
+            // setRevealShow(false)
+            // setReportShow(false);
             setLinkShow(false)
             setLinkSuccess(true)
         } else {
@@ -149,9 +155,16 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
         console.log(error)
     }
   }
+
+  const handleReply = ()=> {
+    setShowReply(false)
+    setReply(messageR)
+    setMessageId(0);
+  }
+
     return (
         <> 
-        <div className='chatNav_cont px-3 py-4 d-flex align-items-center justify-content-between'>
+        <div className='chatNav_cont px-3 py-3 d-flex align-items-center justify-content-between'>
             <div className='back' onClick={router.back}>
                 <svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 12L12 0L13.68 1.68L3.36 12L13.68 22.32L12 24L0 12Z" fill="#4052CB"/>
@@ -165,21 +178,33 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo}) {
                         <h5 className='mt-3'>{online ?'Online' : 'Offline'}</h5>
                     </div>
                 </div>
-                <div className='options'>            
-                    <Dropdown>
-                        <Dropdown.Toggle id="dropdown-basic">
-                            <svg width="7" height="27" viewBox="0 0 7 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 23.6667C0 25.5 1.5 27 3.33333 27C5.16667 27 6.66667 25.5 6.66667 23.6667C6.66667 21.8333 5.16667 20.3333 3.33333 20.3333C1.5 20.3333 0 21.8333 0 23.6667ZM0 3.66667C0 5.5 1.5 7 3.33333 7C5.16667 7 6.66667 5.5 6.66667 3.66667C6.66667 1.83333 5.16667 0.333334 3.33333 0.333334C1.5 0.333334 0 1.83333 0 3.66667ZM0 13.6667C0 15.5 1.5 17 3.33333 17C5.16667 17 6.66667 15.5 6.66667 13.6667C6.66667 11.8333 5.16667 10.3333 3.33333 10.3333C1.5 10.3333 0 11.8333 0 13.6667Z" fill="#465ADA"/>
-                            </svg>
-                        </Dropdown.Toggle>
+                <div className='d-flex align-items-center'>
+                    {showReply && <svg width="30" style={{cursor: 'pointer'}} className='me-3' onClick={handleReply} height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_237_1681" style={{maskType:"luminance"}} maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="26">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M28.6667 24.5573C25.4047 20.5753 22.508 18.316 19.976 17.7787C17.4447 17.242 15.0347 17.1607 12.7453 17.5353V24.6667L2 13.03L12.7453 2V8.778C16.978 8.81133 20.576 10.33 23.54 13.3333C26.5033 16.3367 28.2127 20.078 28.6667 24.5573Z" fill="white" stroke="white" stroke-width="2.66667" stroke-linejoin="round"/>
+                    </mask>
+                    <g mask="url(#mask0_237_1681)">
+                    <path d="M-0.666992 -2.66669H31.333V29.3333H-0.666992V-2.66669Z" fill="#465ADA"/>
+                    </g>
+                    </svg>}
 
-                        <Dropdown.Menu>
-                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && roomInfo.links == 0 && setLinkShow(true)}><span>{roomInfo.links == 0 ? 'Allow Links' : 'Links Allowed'}</span></Dropdown.Item>}
-                            {roomInfo.user_id !== JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 &&  setRevealShow(true)}><span>Reveal Profile</span></Dropdown.Item>}
-                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setReportShow(true)}><span style={{color: '#F9CA1C'}}>Report User</span></Dropdown.Item>}
-                            {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setBlockShow(true)}><span style={{color: '#F6521E'}}>{roomInfo.block !== 1 ? 'Block User' : 'room locked'}</span></Dropdown.Item>}
-                        </Dropdown.Menu>
-                    </Dropdown>
+
+                    <div className='options'>            
+                        <Dropdown>
+                            <Dropdown.Toggle id="dropdown-basic">
+                                <svg width="7" height="27" viewBox="0 0 7 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 23.6667C0 25.5 1.5 27 3.33333 27C5.16667 27 6.66667 25.5 6.66667 23.6667C6.66667 21.8333 5.16667 20.3333 3.33333 20.3333C1.5 20.3333 0 21.8333 0 23.6667ZM0 3.66667C0 5.5 1.5 7 3.33333 7C5.16667 7 6.66667 5.5 6.66667 3.66667C6.66667 1.83333 5.16667 0.333334 3.33333 0.333334C1.5 0.333334 0 1.83333 0 3.66667ZM0 13.6667C0 15.5 1.5 17 3.33333 17C5.16667 17 6.66667 15.5 6.66667 13.6667C6.66667 11.8333 5.16667 10.3333 3.33333 10.3333C1.5 10.3333 0 11.8333 0 13.6667Z" fill="#465ADA"/>
+                                </svg>
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && roomInfo.links == 0 && setLinkShow(true)}><span>{roomInfo.links == 0 ? 'Allow Links' : 'Links Allowed'}</span></Dropdown.Item>}
+                                {roomInfo.user_id !== JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 &&  setRevealShow(true)}><span>Reveal Profile</span></Dropdown.Item>}
+                                {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setReportShow(true)}><span style={{color: '#F9CA1C'}}>Report User</span></Dropdown.Item>}
+                                {roomInfo.user_id == JSON.parse(localStorage.currentUser).user.id && <Dropdown.Item className='py-2' onClick={()=> roomInfo.block !== 1 && setBlockShow(true)}><span style={{color: '#F6521E'}}>{roomInfo.block !== 1 ? 'Block User' : 'room locked'}</span></Dropdown.Item>}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,11 +8,13 @@ import {environment} from '../../../environment/environment'
 import Sentiment from 'sentiment';
 import io from 'socket.io-client';
 import Waveform from '../../../components/audioD'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 
 const socket = io.connect(environment.socketUrl); 
 
-function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply, reply, allow}) {
+function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply, reply, allow, setMessageId, setShowReply}) {
     let token = getCookie('token');
     const router = useRouter();
     const [text, setText] = useState('');
@@ -25,7 +27,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     const [minutes, setMinutes] = useState(0);
     const [sending, setSending] = useState(false);
     const audioBRef = useRef(null); 
-    
+    const [showEmoji, setShowEmoji] = useState(false);
     
 
     const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -166,6 +168,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     }
 
     const sendMessage = async()=> {
+        setShowReply(false)
+        setMessageId(0);
+        setShowEmoji(false);
         if(fullpath.length > 4 && !exists && !checkForLink(text) && !sending) {
             createRoom(fullpath[5], fullpath[1], text);
         }
@@ -185,6 +190,9 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     }
 
     const voiceRecord = ()=> {
+        setShowReply(false)
+        setMessageId(0)
+        setShowEmoji(false);
         navigator.mediaDevices.getUserMedia({ audio: true })
         .then((stream) => {
           const mediaRecorder = new MediaRecorder(stream);
@@ -314,12 +322,13 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
         // var urlPattern = /(http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)\.[a-z]{2,5}(:[0-9]{1,5})?(\/.)?/gi;
 
         // return urlPattern.test(input);
-        if(input.includes('http') || input.includes('https') || input.includes('www')) {
+        if(input.includes('http') || input.includes('HTTP') || input.includes('HTTPS') || input.includes('https') || input.includes('www')) {
             return true
         }else{
             return false;
         }
     }
+
 
     return (
         <>
@@ -348,11 +357,14 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                     </div>
                 </div>
             }
-            <div className='chatInput_cont px-3 pt-2 pb-4'>
+            {showEmoji && <div className='emoji_sec'>
+                <Picker data={data} theme="light" previewPosition="none" onEmojiSelect={(emoji)=> setText(text + emoji.native)} />
+            </div>}
+            <div className='chatInput_cont px-3 pt-2 pb-5'>
                 <div className='d-flex justify-content-between align-items-center'>
                     {audioUrl == null && <form action="" onSubmit={(e)=> e.preventDefault()} className='position-relative'>
                         <input value={text} onChange={(e)=> setText(e.target.value)} type="text" id='myInputC' className='py-3 rounded-pill pe-3' placeholder='Type message ...' />
-                        <div className='position-absolute emojiF'>
+                        <div className='position-absolute emojiF' onClick={()=> setShowEmoji(!showEmoji)}>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 0C3.58187 0 0 3.58187 0 8C0 12.4181 3.58187 16 8 16C12.4181 16 16 12.4181 16 8C16 3.58187 12.4181 0 8 0ZM8 15.3333C3.95627 15.3333 0.666667 12.0437 0.666667 8C0.666667 3.95627 3.95627 0.666667 8 0.666667C12.0435 0.666667 15.3333 3.95627 15.3333 8C15.3333 12.0437 12.0435 15.3333 8 15.3333Z" fill="#3A3A3A" fillOpacity="0.8"/>
                             <path d="M4.93343 7.35786C5.66981 7.35786 6.26676 6.76091 6.26676 6.02453C6.26676 5.28815 5.66981 4.69119 4.93343 4.69119C4.19705 4.69119 3.6001 5.28815 3.6001 6.02453C3.6001 6.76091 4.19705 7.35786 4.93343 7.35786Z" fill="#3A3A3A" fillOpacity="0.8"/>
