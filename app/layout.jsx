@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
         {/* <meta name="csrf-token" content="{{ csrf_token() }}" /> */}
         <title>phantom</title>
         <meta name="description" content="Phantom application" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
         <meta name="title" content="Phantom" />
         {/* <meta name="author" content="Gtec" /> */}
       </head>

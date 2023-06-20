@@ -1060,8 +1060,8 @@ h1,h2,h3,h4,h5,h6, p {
 }
 
 .chatInput_cont form {
-  width: 100%;
-  /* width: 85%; */
+  /* width: 100%; */
+  width: 85%;
   z-index: 1;
 }
 .chatInput_cont input {
@@ -1071,7 +1071,7 @@ h1,h2,h3,h4,h5,h6, p {
   border-radius: 28px;  
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 18px;
   width: 100%;
   padding-left: 40px;
@@ -1108,13 +1108,13 @@ h1,h2,h3,h4,h5,h6, p {
   background: linear-gradient(258.92deg, #465ADA -31.6%, #3596BF 93.1%);
   border-radius: 50%;
   width: 52px;
-  /* position: static;
-  z-index: 2000;
-  height: 52px; */
-  position: absolute;
+  position: static;
   z-index: 2000;
   height: 52px;
-  right: 11px;
+  /* position: absolute;
+  z-index: 2000;
+  height: 52px;
+  right: 11px; */
 }
 .chatInput_cont .emojiF {
   top: 0;
