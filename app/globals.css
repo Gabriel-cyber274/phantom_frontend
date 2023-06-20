@@ -1464,3 +1464,6 @@ h1,h2,h3,h4,h5,h6, p {
   display: flex;
   justify-content: center;
 }
+input[type="text"], input[type="number"], textarea {
+  touch-action: manipulation !important;
+}
