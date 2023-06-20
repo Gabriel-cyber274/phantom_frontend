@@ -360,7 +360,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             {showEmoji && <div className='emoji_sec'>
                 <Picker data={data} theme="light" previewPosition="none" onEmojiSelect={(emoji)=> setText(text + emoji.native)} />
             </div>}
-            <div className='chatInput_cont px-3 pt-2 pb-5'>
+            <div className='chatInput_cont px-3 pt-2 pb-4'>
                 <div className='d-flex justify-content-between align-items-center'>
                     {audioUrl == null && <form action="" onSubmit={(e)=> e.preventDefault()} className='position-relative'>
                         <input value={text} onChange={(e)=> setText(e.target.value)} type="text" id='myInputC' className='py-3 rounded-pill pe-3' placeholder='Type message ...' />
