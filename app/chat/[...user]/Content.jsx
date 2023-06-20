@@ -31,7 +31,9 @@ function Content({params}) {
   const [messageId, setMessageId] = useState();
   const [messageR, setMessageR] = useState({});
   const holdTimeoutRef = useRef(null);
-  const [showReply, setShowReply] = useState(false)
+  const [showReply, setShowReply] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
+
 
   
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -94,6 +96,7 @@ function Content({params}) {
             setMessages(res.data.messages)
             setRoomInfo(res.data.room_info)
             readMessages();
+            console.log(res.data.room_info);
           }
           else {
             notify_err(res.data.message)
@@ -190,8 +193,7 @@ function Content({params}) {
                 notify_err(res.data.message)
             }
         
-        });
-    
+        });    
         // return () => {
         //   socket.disconnect(); // Disconnect the socket when the component unmounts
         // };
@@ -259,7 +261,7 @@ function Content({params}) {
                 </div>
             }
 
-            {!loading && <div className='chatBody'>
+            {!loading && <div className='chatBody' onClick={()=> setShowEmoji(false)}>
                 <div className='ps-3 pe-4 chat'>
                     {messages.map((message, idx)=> (
                         <div key={idx}>
@@ -314,7 +316,7 @@ function Content({params}) {
                     <div style={{height: '70px'}} ref={chatBodyRef}></div>
                 </div>
             </div>}
-            <ChatInput setShowReply={setShowReply} setMessageId={setMessageId} allow={roomInfo.links} reply={reply} userInfo={userInfo} setReply={setReply} chatBodyRef={chatBodyRef} setExists={setExists} exists={exists} fullpath={params} />
+            <ChatInput setShowEmoji={setShowEmoji} showEmoji={showEmoji} setShowReply={setShowReply} setMessageId={setMessageId} allow={roomInfo.links} reply={reply} userInfo={userInfo} setReply={setReply} chatBodyRef={chatBodyRef} setExists={setExists} exists={exists} fullpath={params} />
         </div>
     )
 }

@@ -14,7 +14,7 @@ import Picker from '@emoji-mart/react'
 
 const socket = io.connect(environment.socketUrl); 
 
-function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply, reply, allow, setMessageId, setShowReply}) {
+function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply, reply, allow, setMessageId, setShowReply, setShowEmoji, showEmoji}) {
     let token = getCookie('token');
     const router = useRouter();
     const [text, setText] = useState('');
@@ -27,7 +27,6 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
     const [minutes, setMinutes] = useState(0);
     const [sending, setSending] = useState(false);
     const audioBRef = useRef(null); 
-    const [showEmoji, setShowEmoji] = useState(false);
     
 
     const notify_err = (res) => toast.error(res, { theme: "colored" });

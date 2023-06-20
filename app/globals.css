@@ -942,7 +942,7 @@ h1,h2,h3,h4,h5,h6, p {
   border-radius: 10px;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 16px;
   border: 1px solid black;
   background-color: white;
   line-height: 15px;
@@ -958,7 +958,7 @@ h1,h2,h3,h4,h5,h6, p {
 }
 .nav2_cont .second form div {
   left: 7%;
-  top: 10px;
+  top: 15px;
 }
 .nav2_cont {
   position: sticky;
@@ -1238,7 +1238,7 @@ h1,h2,h3,h4,h5,h6, p {
   top: 0;
 }
 .reply_main_cont {
-  bottom: 13.2%;
+  bottom: 87px;
   width: 100%;
   z-index: 500;
 }

@@ -174,7 +174,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply
                 <div className='d-flex align-items-center'>
                     <img src={avatars[!fullpath[4]? fullpath[3]: fullpath[4]]} alt=""/>
                     <div className='ms-3'>
-                        <h1>{name}</h1>
+                        <h1>{name.includes('%20')? name.replace('%20', ' ') : name}</h1>
                         <h5 className='mt-3'>{online ?'Online' : 'Offline'}</h5>
                     </div>
                 </div>
