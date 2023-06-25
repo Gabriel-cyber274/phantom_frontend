@@ -14,7 +14,7 @@ export const environment = {
     // baseUrl: 'localhost:8000/api/',
     baseUrl: 'phantomlaravel.org.ng/api/',
     app_url: 'http://localhost:3000/',
-    socketUrl: 'https://phantom-node.vercel.app',
+    socketUrl: 'https://guiltless-brash-crop.glitch.me',
     // socketUrl: 'http://localhost:4000',
     fileUrl: '127.0.0.1:8000/',
 
