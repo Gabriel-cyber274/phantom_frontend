@@ -1130,7 +1130,8 @@ h1,h2,h3,h4,h5,h6, p {
   width: 100%;
 }
 .chatBody .chat{
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   width: 100%;
   padding-top: 10px;

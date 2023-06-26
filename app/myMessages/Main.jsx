@@ -46,7 +46,7 @@ function Main({loadingMain, data}) {
           }
         } catch (error) {
           setLoading(false)
-          notify_err('error') 
+          // notify_err('error') 
         }
     }
 

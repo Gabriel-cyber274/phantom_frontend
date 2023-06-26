@@ -69,7 +69,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 notify_err(res.data.message);
             }
         } catch (error) {
-            notify_err('error');
+            // notify_err('error');
             console.log(error, 'create')
         }
 
@@ -161,7 +161,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
             }
         } catch (error) {
             setSending(false);
-            notify_err('error');
+            // notify_err('error');
             console.log(error);
         }
     }
@@ -291,7 +291,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 notify_err(res.data.message);
             }
         } catch (error) {
-            notify_err('error')
+            // notify_err('error')
             console.log(error);
         }
     }

@@ -63,7 +63,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply
             notify_err(res.data.message);
         }
       } catch (error) {
-          notify_err('error');
+        //   notify_err('error');
           console.log(error)
       }
   }
@@ -90,7 +90,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply
             notify_err(res.data.message);
         }
     } catch (error) {
-        notify_err('error');
+        // notify_err('error');
         console.log(error)
     }
   }
@@ -118,7 +118,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply
             notify_err(res.data.message);
         }
     } catch (error) {
-        notify_err('error');
+        // notify_err('error');
         console.log(error)
     }
   }
@@ -151,7 +151,7 @@ function ChatNav({name, onlineUsers, fullpath, roomInfo, setShowReply, showReply
             notify_err(res.data.message);
         }
     } catch (error) {
-        notify_err('error');
+        // notify_err('error');
         console.log(error)
     }
   }
