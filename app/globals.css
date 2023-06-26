@@ -114,6 +114,104 @@ a {
   /* padding: 30px 0; */
   position: relative;
 }
+.forgotMain {
+  background-color: #4255D0;
+  width: 100%;
+  height: 100vh;
+}
+.forgotNav {
+  width: 85%;
+  margin: auto;
+}
+.forgotNav h2 {
+  color: #FFF;
+  text-align: center;
+  font-size: 19.04px;
+  font-weight: 600;
+}
+.forgotNav a {
+  left: 0;
+}
+.forgotMain p {
+  color: #FFF;
+  text-align: center;
+  font-size: 14.833px;
+  width: 85%;
+  margin: auto;
+  font-weight: 500;
+  line-height: 29.667px;
+}
+.mainForgot {
+  width: 85%;
+  margin: auto;
+}
+.mainForgot h1 {
+  color: #FFF;
+  font-size: 19.04px;
+  font-weight: 600;
+}
+.mainForgot button {
+  background: #F5D716;
+  color: #000;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 32px;
+  border: none;
+  outline: none;
+}
+.mainForgot h5 {
+  color: #FFF;
+  text-align: center;
+  font-size: 15.05px;
+  font-weight: 500;
+  line-height: 29.819px;
+}
+.forgotForm input {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid white;
+  background-color: transparent;
+  color: #F5D716;
+  outline: none;
+}
+.forgotForm select {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid white;
+  background-color: transparent;
+  color: #F5D716;
+  outline: none;
+}
+.forgotForm input:focus {
+  border-bottom: 3px solid #F5D716;
+}
+.forgotForm form div svg {
+  right: 0;
+  top: 10px;
+}
+.forgotForm form div svg path {
+  fill: white;
+}
+
+.forgotForm input::placeholder {
+  color: white;
+}
+.mainForgot h4 {
+  color: #FFF;
+  text-align: center;
+  font-size: 17.28px;
+  line-height: 34.56px;
+}
+.mainForgot h4 a {
+  text-decoration: none;
+  color: #F0CD10; 
+}
 
 .authbg {
   position: absolute;
@@ -176,6 +274,16 @@ a {
   color: #FFFFFF;
 }
 .auth_form input {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid white;
+  background-color: transparent;
+  color: #F5D716;
+  outline: none;
+}
+.auth_form select {
   width: 100%;
   border-top: none;
   border-left: none;

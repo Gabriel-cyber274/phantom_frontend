@@ -33,7 +33,9 @@ export const environment = {
       logout: 'logout',
       info: 'userInfo',
       changeAvatar: 'changeAvatar',
-      addAvatar: 'addAvatar'
+      addAvatar: 'addAvatar',
+      forgotPasswordCheck: 'forgotPasswordCheck',
+      changePassword: 'changePassword'
     },
     reviews: {
       main: 'goodReviews'

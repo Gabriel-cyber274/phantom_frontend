@@ -17,6 +17,7 @@ function Content() {
   const [supported, setSupported] = useState(false);
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
+  const [questionSelected, setQuestionSelected] = useState(false);
 
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -60,7 +61,7 @@ function Content() {
   const signUp = async(e)=> {
     e.preventDefault();
     let url = baseUrl + environment.auth.register;
-    if(e.target[0].value.length == 0 || e.target[1].value.length == 0 || e.target[2].value.length == 0 || e.target[3].value.length == 0) {
+    if(e.target[0].value.length == 0 || e.target[1].value.length == 0 || e.target[2].value.length == 0 || e.target[3].value.length == 0 || !supported && e.target[4].value.length == 0 || !supported && e.target[5].value.length == 0 || supported && e.target[5].value.length == 0 || supported && e.target[6].value.length == 0) {
       notify_err('fill form to signup');
     }
     else if(supported && e.target[3].value !== e.target[4].value || !supported && e.target[2].value !== e.target[3].value) {
@@ -72,6 +73,8 @@ function Content() {
         email: e.target[1].value,
         location: supported ? location : 'unknown',
         password: supported ? e.target[3].value : e.target[2].value,
+        question: supported ? e.target[5].value : e.target[4].value,
+        answer: supported ? e.target[6].value.toLocaleUpperCase() : e.target[5].value.toLocaleUpperCase()
       }
       
       try {
@@ -154,6 +157,18 @@ function Content() {
                                   <path d="M7.148 12.2271C6.33665 10.4325 6.18059 8.41017 6.70702 6.51238C7.23345 4.61459 8.409 2.96164 10.0289 1.84148C11.6487 0.72132 13.6103 0.20496 15.5717 0.382355C17.5331 0.559751 19.3702 1.41966 20.7628 2.81227C22.1554 4.20488 23.0153 6.04193 23.1927 8.00337C23.3701 9.96481 22.8537 11.9263 21.7336 13.5462C20.6134 15.1661 18.9605 16.3416 17.0627 16.868C15.1649 17.3945 13.1426 17.2384 11.348 16.4271L10.6 17.1751H7.802V19.9751H5.002V22.7751H0.802002V18.5751L7.148 12.2271ZM14.797 11.5751C15.3508 11.5751 15.8921 11.4108 16.3526 11.1032C16.8131 10.7955 17.1719 10.3582 17.3839 9.84657C17.5958 9.33494 17.6512 8.77196 17.5432 8.22881C17.4352 7.68566 17.1685 7.18675 16.7769 6.79516C16.3853 6.40358 15.8864 6.1369 15.3433 6.02886C14.8001 5.92082 14.2371 5.97627 13.7255 6.1882C13.2139 6.40012 12.7766 6.75901 12.4689 7.21946C12.1612 7.67992 11.997 8.22127 11.997 8.77506C11.9965 9.1431 12.0685 9.50763 12.209 9.8478C12.3495 10.188 12.5556 10.4971 12.8157 10.7575C13.0757 11.018 13.3846 11.2246 13.7246 11.3655C14.0645 11.5065 14.429 11.5791 14.797 11.5791V11.5751Z" fill="white"/>
                                   </svg>
                                 </div>
+                                <div className='mt-3 position-relative'>
+                                  <select className='py-2 ps-1 px-4' onChange={(e)=> e.target.value !== '' ? setQuestionSelected(true): setQuestionSelected(false)} name="" id="">
+                                    <option value="" selected>PICK A SECURITY QUESTION</option>
+                                    <option value="Your first pet's name">Your first pet's name</option>
+                                    <option value="Your surname">Your surname</option>
+                                    <option value="Your favorite food">Your favorite food</option>
+                                    <option value="Your favorite color">Your favorite color</option>
+                                  </select>
+                                </div>
+                                {questionSelected && <div className='mt-3 position-relative'>
+                                  <input  className='py-2 ps-1 px-4' type="text" placeholder='Answer' name="" id="" />
+                                </div>}
                                 <div className='text-center mt-5 mb-3'>
                                   {!loading && <button className='py-2 px-5'>Sign Up</button>}
                                   {loading && <div className='loadingAuth'>
