@@ -10,7 +10,7 @@ import { environment } from '../../../environment/environment';
 
 const baseUrl = environment.scheme + environment.baseUrl;
 
-function page() {
+function Page() {
     const [loading,setLoading] = useState(false);
     const router = useRouter();
     const [passwordView, setPasswordView] = useState(false);
@@ -110,4 +110,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

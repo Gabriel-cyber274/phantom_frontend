@@ -9,7 +9,7 @@ import { environment } from '../../../environment/environment';
 
 
 const baseUrl = environment.scheme + environment.baseUrl;
-function page() {
+function Page() {
   const [questionSelected, setQuestionSelected] = useState(false);
   const [loading,setLoading] = useState(false);
   const router = useRouter();
@@ -79,7 +79,7 @@ function page() {
                         <div className='mt-3 position-relative'>
                             <select className='py-2 ps-1 px-4' onChange={(e)=> e.target.value !== '' ? setQuestionSelected(true): setQuestionSelected(false)} name="" id="">
                             <option value="" selected>PICK A SECURITY QUESTION</option>
-                            <option value="Your first pet's name">Your first pet's name</option>
+                            <option value="Your first pet's name">{"Your first pet's name"}</option>
                             <option value="Your surname">Your surname</option>
                             <option value="Your favorite food">Your favorite food</option>
                             <option value="Your favorite color">Your favorite color</option>
@@ -112,4 +112,4 @@ function page() {
     )
 }
 
-export default page
+export default Page
