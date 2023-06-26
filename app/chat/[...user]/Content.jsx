@@ -188,7 +188,7 @@ function Content({params}) {
             if(res.data.success) {
                 setMessages(res.data.messages)
                 setRoomInfo(res.data.room_info)
-                readMessages();
+                // readMessages();
             }
             else {
                 notify_err(res.data.message)
