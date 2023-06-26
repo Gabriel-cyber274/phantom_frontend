@@ -44,7 +44,9 @@ function Page() {
                 password: e.target[0].value,
             }
             try {
+                setLoading(true)
                 const res = await axios.post(url, data);
+                setLoading(false)
                 if(res.data.success) {
                     window.location.href = '/auth/login';
                 }

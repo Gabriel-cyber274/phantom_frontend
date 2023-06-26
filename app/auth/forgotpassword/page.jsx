@@ -37,7 +37,9 @@ function Page() {
             answer: e.target[2].value.toLocaleUpperCase()
         }
         try {
+            setLoading(true)
             const res = await axios.post(url, data);
+            setLoading(false)
             localStorage.setItem('recoverEmail', e.target[0].value)
             if(res.data.success) {
                 window.location.href = '/auth/changePassword';
