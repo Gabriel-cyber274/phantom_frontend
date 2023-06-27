@@ -129,7 +129,7 @@ function Content({params}) {
 
         setLoading(false);
         if(res.data.success) {
-            router.push(`chat/${params[3]}/${res.data.room.id}/${res2.data.user.id === res.data.room.user_id ? res.data.room.creator_id : res.data.room.user_id}/${params[params.length > 4 ? 4: params.length-1]}`)
+            router.push(`chat/${params[2]}/${res.data.room.id}/${res2.data.user.id === res.data.room.user_id ? res.data.room.creator_id : res.data.room.user_id}/${params[params.length > 4 ? 4: params.length-1]}`)
             socket.emit('joinRoom', res.data.room.id);
             setExists(true);
         }else {
@@ -252,8 +252,8 @@ function Content({params}) {
 
     return (
 
-        <div className='entireChat position-relative'>
-            <ChatNav setMessageId={setMessageId} setShowReply={setShowReply} showReply={showReply} setReply={setReply} messageR={messageR} roomInfo={roomInfo} name={params.length==4 ? params[0] : params[3]} onlineUsers={onlineUsers} fullpath={params} />
+        <div className='entireChat position-relative' onClick={()=> setShowEmoji(false)}>
+            <ChatNav setMessageId={setMessageId} setShowReply={setShowReply} showReply={showReply} setReply={setReply} messageR={messageR} roomInfo={roomInfo} name={params.length==4 ? params[0] : params[2]} onlineUsers={onlineUsers} fullpath={params} />
 
             {loading && 
                 <div className='d-flex justify-content-center align-items-center' style={{width: '100%', height: '100vh'}}>

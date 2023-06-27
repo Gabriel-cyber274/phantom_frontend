@@ -346,18 +346,23 @@ a {
     display: none;
   }
   .authbg {
-    position: fixed;
+    /* position: fixed; */
+    height: 100vh;
   }
-  .regabg {
+  /* .regabg {
     position: absolute !important;
-  }
+  } */
   .main_auth_dis {
     width: 100%;
-    overflow: auto;
-    min-height: 859px;
+    overflow: hidden;
+    min-height: max-content;
     max-height: auto;
     background: transparent;
     box-shadow: none;
+  }
+  .main_auth_dis_cont {
+    height: max-content;
+    background: #4255D0;
   }
   .bigSA {
     display: none !important;
@@ -365,7 +370,7 @@ a {
   .main_auth_dis .second {
     width: 100%;
     transform: translateY(200%);
-    height: 669px;
+    height: max-content;
     animation: fadet 0.95s ease-out 1 forwards;
     /* position: fixed; */
     width: 100%;
@@ -375,17 +380,15 @@ a {
     height: max-content !important;
   } */
   .main_auth_dis .regS{
-    margin-top: 30px;
+    margin-top: 64px;
   }
 
   @keyframes fadet {
     0% {
       transform: translateY(200%);
-      position: fixed;
     }
     100% {
       transform: translateY(0%);
-      position: relative !important;
     }
   }
 
@@ -397,7 +400,7 @@ a {
   }
 
   .authbg .animate {
-    height: 152px;
+    height: 25%;
     transition: 1s;
   }
   .main_auth_dis .first {
