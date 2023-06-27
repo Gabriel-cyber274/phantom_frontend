@@ -1184,7 +1184,7 @@ h1,h2,h3,h4,h5,h6, p {
   width: 85%;
   z-index: 1;
 }
-.chatInput_cont input {
+.chatInput_cont textarea {
   background: rgba(255, 255, 255, 0.03);
   border: 0.3px solid #465ADA;
   box-shadow: 0px 4px 17px 1px rgba(0, 0, 0, 0.1);
@@ -1579,7 +1579,7 @@ h1,h2,h3,h4,h5,h6, p {
 }
 .emoji_sec {
   position: absolute;
-  bottom: 89px;
+  bottom: 97px;
   z-index: 5000;
   width: 100%;
   display: flex;

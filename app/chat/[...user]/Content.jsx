@@ -252,8 +252,8 @@ function Content({params}) {
 
     return (
 
-        <div className='entireChat position-relative' onClick={()=> setShowEmoji(false)}>
-            <ChatNav setMessageId={setMessageId} setShowReply={setShowReply} showReply={showReply} setReply={setReply} messageR={messageR} roomInfo={roomInfo} name={params.length==4 ? params[0] : params[2]} onlineUsers={onlineUsers} fullpath={params} />
+        <div className='entireChat position-relative'>
+            <ChatNav setMessageId={setMessageId} setShowEmoji={setShowEmoji} setShowReply={setShowReply} showReply={showReply} setReply={setReply} messageR={messageR} roomInfo={roomInfo} name={params.length==4 ? params[0] : params[2]} onlineUsers={onlineUsers} fullpath={params} />
 
             {loading && 
                 <div className='d-flex justify-content-center align-items-center' style={{width: '100%', height: '100vh'}}>
