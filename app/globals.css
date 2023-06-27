@@ -348,10 +348,13 @@ a {
   .authbg {
     position: fixed;
   }
+  .regabg {
+    position: absolute !important;
+  }
   .main_auth_dis {
     width: 100%;
     overflow: auto;
-    min-height: 100vh;
+    min-height: 859px;
     max-height: auto;
     background: transparent;
     box-shadow: none;
@@ -362,11 +365,15 @@ a {
   .main_auth_dis .second {
     width: 100%;
     transform: translateY(200%);
-    height: 100vh;
+    height: 669px;
     animation: fadet 0.95s ease-out 1 forwards;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
   }
+  /* .secondrs {
+    position: relative !important;
+    height: max-content !important;
+  } */
   .main_auth_dis .regS{
     margin-top: 30px;
   }
@@ -374,9 +381,11 @@ a {
   @keyframes fadet {
     0% {
       transform: translateY(200%);
+      position: fixed;
     }
     100% {
       transform: translateY(0%);
+      position: relative !important;
     }
   }
 
@@ -388,7 +397,7 @@ a {
   }
 
   .authbg .animate {
-    height: 25%;
+    height: 152px;
     transition: 1s;
   }
   .main_auth_dis .first {

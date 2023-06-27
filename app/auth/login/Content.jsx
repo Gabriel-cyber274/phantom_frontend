@@ -14,6 +14,7 @@ const baseUrl = environment.scheme + environment.baseUrl;
 function Content({link}) {
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const [adjust, setAdjust] = useState(false);
   const [loading,setLoading] = useState(false);
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -25,6 +26,7 @@ function Content({link}) {
     let int = setTimeout(() => {
         setShow(true);
     }, 2500);
+
     deleteCookie('token')
     localStorage.removeItem('currentUser');
     if(link) {
@@ -32,6 +34,20 @@ function Content({link}) {
     }
     return()=> clearTimeout(int);
   }, [])
+
+
+  useEffect(()=> {    
+     let int2 = setTimeout(() => {
+       setAdjust(true);
+     }, 3000);
+ 
+ 
+     return()=> {
+       clearTimeout(int2);
+     }
+   })
+ 
+  
 
 
 
@@ -79,7 +95,7 @@ function Content({link}) {
 
   return (
     <>  
-        <div className='authbg'>
+        <div className={`authbg ${adjust ?'regabg': ''}`}>
           <div className={`first ${show && 'animate'} position-relative`}>
               <img src="/assets/design.png" alt="" />
               <div className='d-flex position-absolute aniTest justify-content-center align-items-center'>

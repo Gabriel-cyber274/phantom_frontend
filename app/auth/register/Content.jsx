@@ -18,6 +18,7 @@ function Content() {
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
   const [questionSelected, setQuestionSelected] = useState(false);
+  const [adjust, setAdjust] = useState(false);
 
 
   const notify_err = (res) => toast.error(res, { theme: "colored" });
@@ -30,8 +31,19 @@ function Content() {
         setShow(true);
     }, 2500);
 
-    return()=> clearTimeout(int);
+    
+    let int2 = setTimeout(() => {
+      setAdjust(true);
+    }, 2515);
+
+
+    return()=> {
+      clearTimeout(int2);
+      clearTimeout(int);
+    }
   })
+
+
 
   useEffect (()=> {
     if("geolocation" in navigator) {
@@ -105,7 +117,7 @@ function Content() {
 
   return (
     <>  
-        <div className='authbg'>
+        <div className={`authbg ${adjust ?'regabg': ''}`}>
           <div className={`first ${show && 'animate'} position-relative`}>
               <img src="/assets/design.png" alt="" />
               <div className='d-flex position-absolute aniTest justify-content-center align-items-center'>
@@ -117,12 +129,12 @@ function Content() {
         {show && 
           <div className='d-flex justify-content-center align-items-end removeAH' style={{width: '100%', height: '100%'}}>
             <div className='d-flex main_auth_dis_cont justify-content-center align-items-center' style={{width: '100%', }}>
-                <div className='main_auth_dis d-md-flex d-block position-relative align-items-center'>
+                <div className='main_auth_dis my-5 my-md-0 d-md-flex d-block position-relative align-items-center'>
                     <div className='first text-center'>
                         <img src="/assets/phantomL.png" alt="" />
                         <h2>Phantom</h2>
                     </div>
-                    <div className={`second py-5 d-flex regS justify-content-center align-items-center`}>
+                    <div className={`second secondrs py-5 d-flex regS justify-content-center align-items-center`}>
                         <div className='first_child'>
                           <div className='auth_form'>
                               <h2>Create Account</h2>

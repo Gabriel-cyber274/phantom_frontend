@@ -207,7 +207,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
                 min ++
               }
                 
-            if(min == 3) {
+            if(min == 1) {
                 audioBRef.current.click();
             }   
                 
