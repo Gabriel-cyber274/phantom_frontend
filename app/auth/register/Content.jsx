@@ -10,6 +10,7 @@ import Link from 'next/link';
 
 
 
+
 const baseUrl = environment.scheme + environment.baseUrl;
 function Content() {
   const [show, setShow] = useState(false);
@@ -57,6 +58,14 @@ function Content() {
     }
   }, [supported, location]);
 
+
+  useEffect(()=> {
+    if(window.location.href.includes('invite_id')) {
+      localStorage.setItem('invite_id', window.location.href.slice(window.location.href.indexOf('=')+1, window.location.href.length))
+      // console.log(window.location.href.slice(window.location.href.indexOf('=')+1, window.location.href.length))
+    }
+  
+  })
 
   const signUp = async(e)=> {
     e.preventDefault();

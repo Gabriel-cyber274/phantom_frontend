@@ -1,15 +1,41 @@
 "use client"
-import React from 'react'
+import React, {useEffect} from 'react'
 import Footer from '../../components/footer';
 import Nav from '../../components/nav';
+import avatars from '../../components/avatars'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Content() {
+
+    const notify_err = (res) => toast.error(res, { theme: "colored" });
+    const notify = (res)=> {
+      toast.success(res, { theme: "colored" })
+    } 
+    
+    // useEffect(() => {
+        
+    //     // console.log(JSON.parse(localStorage.currentUser).user.id)
+
+    // }, [])
+
+    const copyInvite = ()=> {
+        let url = `https://phantom-frontend-651g.vercel.app/auth/register?invite_id=${JSON.parse(localStorage.currentUser).user.id}`
+        navigator.clipboard.writeText(url)
+        .then(() => {
+        notify('Invite link copied to clipboard');
+        })
+        .catch((error) => {
+        console.error('Error copying text:', error);
+        });
+    }
     return (
         <div>
             <Nav text={'User Profile'} />
             <div className='settingsP pb-4 pt-3 d-flex justify-content-center align-items-center'>
                 <div className='avatarSec d-flex flex-column align-items-center'>
                     <div className='circleA position-relative'>
+                        {(localStorage.currentUser !== undefined || localStorage.currentUser !== null) && <img src={avatars[JSON.parse(localStorage.currentUser).user.avatar_id]} alt=""/>}
                         <div className='position-absolute edit d-flex justify-content-center align-items-center'>
                             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.26 3.60102L9.398 0.740018C9.32862 0.670565 9.24623 0.615468 9.15555 0.577876C9.06487 0.540284 8.96766 0.520935 8.8695 0.520935C8.77133 0.520935 8.67413 0.540284 8.58344 0.577876C8.49276 0.615468 8.41037 0.670565 8.341 0.740018L0.520996 8.56102V12.479H4.44L12.26 4.65902C12.3295 4.58956 12.3846 4.50709 12.4222 4.41632C12.4598 4.32555 12.4792 4.22827 12.4792 4.13002C12.4792 4.03177 12.4598 3.93448 12.4222 3.84372C12.3846 3.75295 12.3295 3.67048 12.26 3.60102ZM3.884 10.984H2.016V9.11502L2.048 9.08302L3.921 10.952L3.884 10.984Z" fill="#1E1E1E"/>
@@ -48,7 +74,8 @@ function Content() {
                             </div>
                             <h2 className='ms-5'>Invite a friend</h2>
                         </div>
-                        <div>
+                        <div className='d-flex align-items-end'>
+                            <h6 className='me-2 copy_settings' onClick={copyInvite}>Copy link</h6>
                             <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.21002 0.798004L0.0720215 1.936L5.90903 7.773L0.0720215 13.61L1.21002 14.748L8.14902 7.773L1.21002 0.798004Z" fill="black"/>
                             </svg>
@@ -57,6 +84,7 @@ function Content() {
                 </div>
             </div>
             <Footer /> 
+            <ToastContainer />
         </div>
     )
 }

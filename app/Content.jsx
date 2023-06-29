@@ -77,7 +77,7 @@ function Content() {
     } catch (error) {
       setLoading(false)
       // notify_err('error') 
-      console.log(error, 'ebuka');
+      console.log(error);
     }
   }
 
@@ -91,9 +91,38 @@ function Content() {
       router.push(localStorage.link)
     }
 
+    if (localStorage.invite_id) {
+      inviteUser();
+      localStorage.removeItem('invite_id')
+    }
+
 
   }, [url, router,]);
 
+
+  const inviteUser = async()=> {
+    try {
+      const data = {
+        'user_id': (localStorage.invite_id !== undefined || localStorage.invite_id !== null)  && localStorage.invite_id
+      }
+ 
+      const res = await axios.post(baseUrl + environment.auth.inviteUser, data,  {
+        headers: {
+            'Content-Type' : 'multipart/form-data; boundary=<calculated when request is sent>',
+            'Accept' : 'applications/json',
+            'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      
+      if(!res.data.success) {
+        notify_err(res2.data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
   useEffect(() => {

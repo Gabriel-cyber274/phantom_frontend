@@ -35,7 +35,8 @@ export const environment = {
       changeAvatar: 'changeAvatar',
       addAvatar: 'addAvatar',
       forgotPasswordCheck: 'forgotPasswordCheck',
-      changePassword: 'changePassword'
+      changePassword: 'changePassword',
+      inviteUser: 'inviteUser'
     },
     reviews: {
       main: 'goodReviews'

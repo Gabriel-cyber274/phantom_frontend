@@ -10,11 +10,20 @@ function Nav2({loadingMain, data, sent, setSentRooms, setReceivedRooms}) {
 
 
     const searchRooms = (e)=> {
-        if(sent) {
-            setSentRooms([...data.filter(d=> d.room_name.includes(e.target.value)), ...data.filter(d=> !d.room_name.includes(e.target.value))])
-        }else {
+        if(data.filter(d=> d.room_name.includes(e.target.value)).length == 0 && !sent) {
             setReceivedRooms([...data.filter(d=> d.room_name.includes(e.target.value)), ...data.filter(d=> !d.room_name.includes(e.target.value))]);
         }
+        else if(data.filter(d=> d.room_name.includes(e.target.value)).length == 0 && sent) {
+            setSentRooms([...data.filter(d=> d.room_name.includes(e.target.value)), ...data.filter(d=> !d.room_name.includes(e.target.value))])
+        }
+        else if(data.filter(d=> d.messages.message.includes(e.target.value)).length == 0 && sent) {
+            setSentRooms([...data.filter(d=> d.messages.message.includes(e.target.value)), ...data.filter(d=> !d.messages.message.includes(e.target.value))])
+        }
+        else if(data.filter(d=> d.messages.message.includes(e.target.value)).length == 0 && !sent) {
+            setReceivedRooms([...data.filter(d=> d.messages.message.includes(e.target.value)), ...data.filter(d=> !d.messages.message.includes(e.target.value))])
+        }
+
+        // console.log(data);
     }
 
     return (
