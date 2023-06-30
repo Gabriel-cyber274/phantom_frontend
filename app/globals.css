@@ -1585,7 +1585,7 @@ h1,h2,h3,h4,h5,h6, p {
   margin-top: auto;
 }
 .emoji_sec {
-  position: absolute;
+  position: fixed;
   bottom: 97px;
   z-index: 5000;
   width: 100%;

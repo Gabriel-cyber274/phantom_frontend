@@ -331,7 +331,7 @@ function ChatInput({fullpath, exists, setExists, userInfo, chatBodyRef, setReply
 
     return (
         <>
-            {reply !== null && <div className={`reply_main_cont ${reply.sender_id !== userInfo.id? 'friend_reply': 'your_reply'}  px-3 py-2 position-absolute`}>
+            {reply !== null && <div className={`reply_main_cont ${reply.sender_id !== userInfo.id? 'friend_reply': 'your_reply'}  px-3 py-2 position-fixed`}>
                 <div className='position-relative d-flex justify-content-between align-items-center'>
                     <div>
                         <h2 style={{color: reply.sender_id !== userInfo.id? '#96A4FF' : '#F5D616' }}>{reply.sender_id !== userInfo.id? fullpath[0] : 'You'}</h2>
