@@ -147,7 +147,7 @@ function Content() {
                         </div>
                         {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length > 0 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between align-items-center`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>
@@ -164,7 +164,7 @@ function Content() {
 
                         {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length == 0 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div key={idx} className={`second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`second align-items-center mt-3 d-flex justify-content-between`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>
@@ -181,7 +181,7 @@ function Content() {
 
                         {displayData.length > 3 && displayData.length <= 22 && 
                             displayData.slice(3, 20).map((user, idx)=> (
-                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between`}>
+                                <div key={idx} className={`${user.id == JSON.parse(localStorage.currentUser).user.id && 'me'} second mt-3 d-flex justify-content-between align-items-center`}>
                                     <h2>{idx + 4}</h2>
                                     <div className='d-flex back justify-content-between align-items-center'>
                                         <span></span>
@@ -198,7 +198,7 @@ function Content() {
 
 
                         {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length == 0  && 
-                            <div className='second me mt-3 d-flex justify-content-between'>
+                            <div className='second me mt-3 d-flex justify-content-between align-items-center'>
                                 <h2>{displayData.findIndex(user=> user.id == JSON.parse(localStorage.currentUser).user.id)+1}</h2>
                                 <div className='d-flex back justify-content-between align-items-center'>
                                     <span></span>
