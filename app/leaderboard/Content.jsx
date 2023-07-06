@@ -53,9 +53,9 @@ function Content() {
             if(res.data.success) {
                 setLoading(false);
                 setAll(res.data.all);
-                setDisplayData(res.data.monthly)
-                setMonthly(res.data.monthly)
-                setWeekly(res.data.weekly);
+                setDisplayData(res.data.monthly.length == undefined ? Object.values(res.data.monthly) : res.data.monthly)
+                setMonthly(res.data.monthly.length == undefined ? Object.values(res.data.monthly) : res.data.monthly)
+                setWeekly(res.data.weekly.length == undefined ? Object.values(res.data.weekly) : res.data.weekly);
             }
 
         } catch (error) {
@@ -197,7 +197,7 @@ function Content() {
                         }
 
 
-                        {displayData.length > 22 && displayData.slice(3, 20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length == 0  && 
+                        {displayData.length > 22 && displayData.slice(20).filter(user=> user.id == JSON.parse(localStorage.currentUser).user.id).length !== 0  && 
                             <div className='second me mt-3 d-flex justify-content-between align-items-center'>
                                 <h2>{displayData.findIndex(user=> user.id == JSON.parse(localStorage.currentUser).user.id)+1}</h2>
                                 <div className='d-flex back justify-content-between align-items-center'>
